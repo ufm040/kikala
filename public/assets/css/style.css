@@ -1,12 +1,9 @@
 html, body {
 	font-family: Consolas, monaco, monospace;
-	background-color: #272822;
+	background-color: #F5F5F5;
 	color: #F8F8F2;
 }
 
-.container {
-	margin: 50px;
-}
 
 a {
 	text-decoration: none;
@@ -23,4 +20,44 @@ h1 {
 
 h2 {
 	color: #66D9EF;
+}
+
+.clearfix::after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
+header {
+	background-color: #496883;
+}
+
+nav ul {
+	float: right;
+	height: 32px;
+}
+
+nav li {
+	float: left;
+	list-style: none;
+	border-left: 1px solid #E8E;
+}
+
+nav li:last-child {
+	border-right: 1px solid #E8E;	
+}
+
+nav a {
+	font-size: 16px;
+	display: block;
+	padding: 0 15px;	
+	margin: auto;
+	padding: 0 10px;
+}
+
+nav a:hover {
+	background-color: #643a79;
+}
+nav a.active {
+	background-color: #643a79;	
 }
