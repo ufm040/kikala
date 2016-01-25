@@ -47,13 +47,6 @@ CREATE TABLE IF NOT EXISTS `formations` (
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
---
--- Contenu de la table `formations`
---
-
-INSERT INTO `formations` (`id`, `title`, `dateFormation`, `place`, `duration`, `userId`, `description`, `image`, `totalNumberPlace`, `address`, `zip`, `city`, `country`, `topAnnulation`, `dateCreated`) VALUES
-(1, 'un autre message', '0000-00-00 00:00:00', '', '00:00:12.00', 1, 'une formation ', '', 7, '4 rue pasteur', '45000', 'Orléans', 0, 0, '2016-01-25 14:04:13');
-
 -- --------------------------------------------------------
 
 --
@@ -92,12 +85,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `lastname`, `firstname`, `birthyear`, `sex`, `job`, `instructorDescription`, `studentDescription`, `credit`, `image`, `dateCreated`) VALUES
-(1, 'catherine', 'ufm040@free.fr', '1234', 'catherine', 'moinon', 1980, 'F', 'Student', 'Student', 'Student', 3, '', '2016-01-25 06:25:25');
 
 --
 -- Contraintes pour les tables exportées
