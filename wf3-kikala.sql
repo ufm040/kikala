@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 22 Janvier 2016 à 10:10
+-- Généré le :  Lun 25 Janvier 2016 à 14:22
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `wk3-kikala`
+-- Base de données :  `wf3-kikala`
 --
 
 -- --------------------------------------------------------
@@ -27,20 +27,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `formations` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(65) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateFormation` datetime NOT NULL,
   `place` varchar(65) COLLATE utf8mb4_unicode_ci NOT NULL,
   `duration` time(2) NOT NULL,
   `userId` int(11) NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `totalNumberPlace` int(3) NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` int(40) NOT NULL,
   `topAnnulation` tinyint(1) NOT NULL,
   `dateCreated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -62,23 +67,24 @@ CREATE TABLE IF NOT EXISTS `inscriptions` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(65) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `birthday` year(4) NOT NULL,
-  `sexe` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `birthyear` year(4) NOT NULL,
+  `sex` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
   `job` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instructionDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instructorDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `studentDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `credit` int(4) NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateCreated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+
 
 --
 -- Contraintes pour les tables exportées
@@ -88,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Contraintes pour la table `formations`
 --
 ALTER TABLE `formations`
-  ADD CONSTRAINT `user_formation` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `formations_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 
 --
 -- Contraintes pour la table `inscriptions`
