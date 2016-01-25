@@ -1,0 +1,23 @@
+/***************************/
+/*   Formulaire création   */  
+/*      formation          */
+/***************************/
+
+
+#formationform input , #formationform textarea {
+	display: block;
+	margin: 10px auto;
+	width: 80%;
+	padding: 5px 0 5px 3px;
+}
+
+#formationform {
+	margin-bottom: 30px;
+}
+
+#formationform .btn {
+    display: block;
+    margin: 20px auto auto;
+    width: 30%;
+}
+

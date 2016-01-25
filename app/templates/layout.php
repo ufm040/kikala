@@ -7,29 +7,34 @@
 	<link href='https://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/font-awesome.min.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/datepicker.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/styleformation.css') ?>">
 </head>
 <body>
 	<div class="container-fluid">
 		<header>
 
 		<div class="row">
-			<div class="col-sm-8 col-xs-12">
+			<div class="col-sm-4 col-xs-12">
 				<h1><a href="<?php echo $this->url('home')?>" title="Accueil">Kikala !</a></h1>
 			</div>	
-			<div class="col-sm-4 col-xs-12" id="headconnect">
-				<ul>
-					<li><a href="#" title="Mon compte"><i class="fa fa-user"></i> Mon compte</a></li>
-					<li><a href="#" title="Inscription"><i class="fa fa-power-off"></i> Je m'inscris</a></li>
-				</ul>			
-				</div>
+			<div class="col-sm-8 col-xs-12">
+				<div id="headconnect">
+					<div class="col-sm-6 col-xs-6 yo">
+						<a href="#" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
+					</div>
+					<div class="col-sm-6 col-xs-6 yo">
+						<a href="#" title="Inscription"><i class="fa fa-power-off"></i>Je m'inscris</a>
+					</div>
+				</div>			
 			</div>
 		</div>	
 
 		<nav id="headmenu" class="clearfix">
 			<ul>
 				<li><a href="#" title="Formations">Je cherche une formation</a></li>
-				<li><a href="#" title="Créer une formation">Je crée une formation</a></li>
+				<li><a href="<?php echo $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 			</ul>
 		</nav>			
 		</header>
@@ -50,6 +55,12 @@
 			</nav>			
 		</footer>
 	</div>
-	<script src="<?= $this->assetUrl('js/jquery.min.js') ?>"></script>
+
+	<script src="<?= $this->assetUrl('js/jquery-2.1.4.js') ?>"></script>
+	<!-- pour le datepicker jQuery UI -->
+	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.js') ?>"></script>
+	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.fr.js') ?>"></script>
+
+	<script src="<?= $this->assetUrl('js/main.js') ?>"></script>
 </body>
 </html>

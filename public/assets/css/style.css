@@ -51,31 +51,24 @@ header h1 {
 }
 
 #headconnect {
-	float: right;
-	margin-top: 20px;
-}
-
-#headconnect ul {
-	padding-left:0;	
+	float: right;	
+	padding: 10px 5px;
 	border-radius: 3px;
 	background-color: #E25B34;
+	margin: 30px 5px 20px;
+	width: 60%;
 }
 
-#headconnect li {
-	padding: 5px 2px;
-	border-radius: 5px;
-}
 
-#headconnect li:hover {
+#headconnect a:hover {
 	background-color: #B8573F; 
 } 
 
-
 #headconnect a {
-	padding: 0 15px;	
+	padding: 10px 5px;	
 	font-size: 1.0em;
 	font-family: 'Economica', sans-serif;
-	font-weight: 800;
+	font-weight: 400;
 	color:#fff;
 }
 #headconnect .fa {
@@ -221,5 +214,5 @@ footer {
 	}
 	#headconnect a {	
 		font-size: 1.2em;
-	}		
+	}
 }  
