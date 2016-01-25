@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 25 Janvier 2016 à 14:16
+-- Généré le :  Lun 25 Janvier 2016 à 14:22
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -80,10 +80,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `birthday` year(4) NOT NULL,
-  `sexe` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `birthyear` year(4) NOT NULL,
+  `sex` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
   `job` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instructionDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instructorDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `studentDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `credit` int(4) NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `lastname`, `firstname`, `birthday`, `sexe`, `job`, `instructionDescription`, `studentDescription`, `credit`, `image`, `dateCreated`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `lastname`, `firstname`, `birthyear`, `sex`, `job`, `instructorDescription`, `studentDescription`, `credit`, `image`, `dateCreated`) VALUES
 (1, 'catherine', 'ufm040@free.fr', '1234', 'catherine', 'moinon', 1980, 'F', 'Student', 'Student', 'Student', 3, '', '2016-01-25 06:25:25');
 
 --
