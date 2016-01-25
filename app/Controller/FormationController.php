@@ -8,12 +8,28 @@ class FormationController extends Controller
 {
 
 	/**
-	 * Page d'accueil par défaut
+	 * Page Lsite des formations
+	 */	
+
+
+	public function listFormations(){
+
+		$formationManager = new \Manager\FormationManager();
+
+		$formations = $formationManager->findAll();
+
+		$this->show('formation/list_formations',[
+			"formations" => $formations
+		]);		
+
+	}
+
+	/**
+	 * Page Inscription d'une formation
 	 */
 	public function formationregister()
 	{
 
-		var_dump($_POST);
 
 		$error = [];
 		if ($_POST) {
@@ -28,33 +44,38 @@ class FormationController extends Controller
 			$country = $_POST['country'];
 
 			$isValid = true;
+			if($_FILES['image']['size']!= 0) {
+				$file_info = finfo_open(FILEINFO_MIME_TYPE);
+				$infos = finfo_file($file_info, $_FILES['image']['tmp_name']);
 
-			$extensions = explode('.', $_FILES['image']['name']);
-			var_dump($extensions);
-			$extension = end($extensions);
+				finfo_close($file_info);
 
-			if ($_FILES['image']['error'] ) {
-				$error['image'] = "Erreur dans le téléchargement du fichier $key\n" ;
-				$isValid = false;
-			}
-			elseif ( !in_array($extension, ['jpg', 'jpeg', 'gif','png']) ) {
-				$error['image'] = "Extension non authorisée pour le fichier " ;
-				$isValid = false;				
-			} else {
-				$tmp_name = $_FILES['image']['tmp_name'];
-				$target = 'assets/img/formations/' . uniqid() . '.' . $_FILES['image']['name'];
-				move_uploaded_file($tmp_name, $target);	
-			}			
- 
+				var_dump($infos);
+
+				if ($_FILES['image']['error'] ) {
+					$error['image'] = "Erreur dans le téléchargement du fichier" ;
+					$isValid = false;
+				}
+				elseif ( !in_array($infos, ['image/jpg', 'image/jpeg', 'image/gif','image/png']) ) {
+					$error['image'] = "Extension non authorisée pour le fichier " ;
+					$isValid = false;				
+				} else {
+					$tmp_name = $_FILES['image']['tmp_name'];
+					$target = 'assets/img/formations/' . uniqid() . '.' . $_FILES['image']['name'];
+					move_uploaded_file($tmp_name, $target);	
+				}	
+			}		
 			$newformation = new \Manager\FormationManager();
 
+			$date = \DateTime::createFromFormat('j/m/Y', $dateform);
+
 			if	($isValid) {
-				// on insère en base de données
+					// on insère en base de données
 
 				// 2 - on appelle la méthode insert
 				$newformation->insert([
 					"title" => $title ,
-					"dateFormation" => $dateform,
+					"dateFormation" =>$date->format('Y-m-d H:i:s'),
 					"duration" => $duration,
 					"userId" => 1,
 					"dateCreated" => date("Y-m-d H:i:s"),

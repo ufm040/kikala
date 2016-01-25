@@ -28,7 +28,7 @@
 		    		</div>
 		    		<div class="col-sm-6 col-xs-6">	
 		    			<label for="description">Description</label>
-		    			<textarea id="description" name="description">Une petite description...</textarea>
+		    			<textarea id="description" name="description" placeholder="Décris ta formation"></textarea>
 		    		</div>		    			
 	    		</div>
 			</fieldset>
@@ -38,7 +38,7 @@
     			<div class="row">			
 	    			<div class="col-sm-4 col-xs-4">
 			    		<label for="dateform">Date de la formation</label>
-			    		<input type="text" id="dateform" name="dateform" />
+			    		<input class="form-control" type="text" id="dateform" name="dateform" />
 		    		</div>
 		    		<div class="col-sm-4 col-xs-4">
 						<label for="duration">Durée de la formation</label>

@@ -33,8 +33,8 @@
 
 		<nav id="headmenu" class="clearfix">
 			<ul>
-				<li><a href="#" title="Formations">Je cherche une formation</a></li>
-				<li><a href="<?php echo $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
+				<li><a href="<?= $this->url('list_formations') ?>" title="Formations">Je cherche une formation</a></li>
+				<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 			</ul>
 		</nav>			
 		</header>
@@ -58,8 +58,12 @@
 
 	<script src="<?= $this->assetUrl('js/jquery-2.1.4.js') ?>"></script>
 	<!-- pour le datepicker jQuery UI -->
+	<script src="<?= $this->assetUrl('js/bootstrap.min.js') ?>"></script>
+
+	
 	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.js') ?>"></script>
-	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.fr.js') ?>"></script>
+	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.fr.js') ?>"></script>	
+
 
 	<script src="<?= $this->assetUrl('js/main.js') ?>"></script>
 </body>
