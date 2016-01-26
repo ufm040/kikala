@@ -24,7 +24,7 @@
 					<td><?= $formation['dateCreated'] ?></td>
 					<td><?= $formation['city'] ?></td>
 					<td><?= $formation['duration'] ?></td>	
-					<td><a href="<?= $this->url('formation', ['id' =>$formation['id']]) ?>" title="Voir le détail">Voir</a></td>			
+					<td><a href="<?= $this->url('detail_formation', ['id' =>$formation['id']]) ?>" title="Voir le détail">Voir</a></td>			
 				</tr>
 				<?php endforeach; ?>
 			</tbody>		

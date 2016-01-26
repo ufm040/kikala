@@ -6,7 +6,7 @@
 
 #formationform input , #formationform textarea {
 	display: block;
-	margin: 10px auto;
+	margin: 10px 0;
 	width: 80%;
 	padding: 5px 0 5px 3px;
 }
@@ -19,5 +19,14 @@
     display: block;
     margin: 20px auto auto;
     width: 30%;
+}
+
+
+#formationform p.error {
+	color : red;
+}
+
+#formationform .error > input , #formationform .error > textarea {
+	border: 1px solid red;
 }
 

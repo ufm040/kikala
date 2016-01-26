@@ -18,6 +18,21 @@ $('#formationform').find('input[name="image"]').on('change', function (e) {
     }
 });
 
+function testerror(){
+	var champs = $('#formationform p.error');
+	console.log(champs.length);
+	for ( var i=0; i<champs.length; i++ ) {
+		text = champs[i].textContent;
+		if (text.length > 0) {
+			$input = champs[i].parentNode ;	
+			$input.className += " error";
+		}
+	}   
+}
+
+
+testerror();
+
 //datepicker
 $("#dateform").datepicker({
   todayBtn:"true",
