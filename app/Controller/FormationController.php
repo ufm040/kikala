@@ -109,12 +109,18 @@ class FormationController extends Controller
 				}	
 			}
 
-			$newformation = new \Manager\FormationManager();
-
-			$date = \DateTime::createFromFormat('j/m/Y', $dateform);
 
 			if	($isValid) {
-					// on insère en base de données
+
+				$newformation = new \Manager\FormationManager();
+				$date = \DateTime::createFromFormat('j/m/Y', $dateform);
+				$title = $validator->convertSpecialCaractere($title);
+				$description = $validator->convertSpecialCaractere($description);
+				if ($_SESSION['image_formation']) {
+					$file_name = $_SESSION['image_formation']; 
+				} else {
+					$file_name = ''	;
+				} 
 
 				// 2 - on appelle la méthode insert
 				$newformation->insert([
@@ -132,12 +138,14 @@ class FormationController extends Controller
 					"country" => $country
 				]);
 
+				unset($_SESSION['image_formation']);
+				$id = $newformation->lastInsertFormation()['id'];
+
+
 				// on redirige l'utilisateur vers la page
-				$this->redirectToRoute("detail_formation");
+				$this->redirectToRoute("detail_formation",['id'=>$id]);
 			}			
-
 		}
-
 		$this->show('formation/formationregister' ,  ['error' => $error]);
 	}
 
