@@ -17,8 +17,11 @@
 }
 
 #formationform .btn, #compteform .btn {
-    display: block;
+	display: block;
     margin: 20px auto auto;
+}
+
+#formationform .btn {
     width: 30%;
 }
 
@@ -58,3 +61,13 @@ fieldset > fieldset {
 		margin-left: 200px;
 	}
 }
+
+
+#formationform p.error {
+	color : red;
+}
+
+#formationform .error > input , #formationform .error > textarea {
+	border: 1px solid red;
+}
+

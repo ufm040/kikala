@@ -27,7 +27,9 @@
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
+
 					<a href="#" title="connexion">Connexion</a>
+
 				</div>	
 			</div>
 		</div>

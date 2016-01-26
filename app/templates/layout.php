@@ -25,7 +25,9 @@
 						<a href="#" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
 					</div>
 					<div class="col-sm-6 col-xs-6 yo">
+
 						<a href="<?= $this->url('register') ?>" title="Inscription"><i class="fa fa-power-off"></i>Je m'inscris</a>
+
 					</div>
 				</div>			
 			</div>
@@ -50,7 +52,6 @@
 					<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
 					<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
 					<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
-
 				</ul>
 			</nav>			
 		</footer>

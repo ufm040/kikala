@@ -2,6 +2,7 @@
 	
 	$w_routes = array(
 		['GET', '/', 'Default#home', 'home'],
+
 		['GET', '/a-propos/', 'Default#about', 'about'],
 		['GET', '/mentions-legales/', 'Default#legals', 'legals'],
 
@@ -12,10 +13,11 @@
 		['GET|POST', '/compte/mot-de-passe-oublie/', 'User#forgetpassword', 'forgetpassword'],
 		['GET|POST', '/compte/nouveau-mot-de-passe/', 'User#newpassword', 'newpassword'],
 
+
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
 		['GET', '/formation/liste/', 'Formation#listFormations', 'list_formations'],
+		['GET', '/formation/detail/[:id]', 'Formation#detailFormation', 'detail_formation'],
 	);
 
 	
-																																																																																																																																																																																																																																															

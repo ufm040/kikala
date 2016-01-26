@@ -55,6 +55,7 @@ header h1 {
 	padding: 10px 5px;
 	border-radius: 3px;
 	background-color: #E25B34;
+
 	margin: 30px 0 20px 5px;
 	width: 100%;
 }
@@ -197,6 +198,7 @@ footer {
 	color:#6B6B6A;
 }
 
+
 /* Tablet Responsive */
 @media (min-width: 550px) {
 	#headconnect {
@@ -206,6 +208,13 @@ footer {
 
 /* Desktop Responsive */
 @media (min-width: 890px) {
+}
+
+/*********************/
+/* Responive         */
+/*********************/
+
+@media (min-width: 900px) {
 
 	#headmenu {
 		width:980px;
@@ -213,11 +222,9 @@ footer {
 	#homepage {
 		width: 80%;
 	}
-
 	#headconnect {
 		width: 60%;
 	}
-
 	#headconnect a {	
 		font-size: 1.2em;
 	}
