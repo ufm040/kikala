@@ -43,4 +43,9 @@ class FormationValidator {
             }
         }
     }
+
+
+    public function convertSpecialCaractere($value) {
+        return htmlspecialchars($value, ENT_HTML5);
+    }
 }
