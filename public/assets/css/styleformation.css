@@ -1,0 +1,60 @@
+/***************************/
+/*   Formulaire création   */  
+/*      formation          */
+/***************************/
+
+/* Mobile Responsive */
+
+#formationform input , #formationform textarea, #compteform input, #compteform textarea {
+	display: block;
+	margin: 10px auto;
+	width: 80%;
+	padding: 5px 0 5px 3px;
+}
+
+#formationform {
+	margin-bottom: 30px;
+}
+
+#formationform .btn, #compteform .btn {
+    display: block;
+    margin: 20px auto auto;
+    width: 30%;
+}
+
+#compteform .btn {
+	width: 35%;
+}
+
+label {
+	font-size: 17px;
+}
+
+#compteform label {
+	margin-left: 30px;
+}
+
+fieldset > fieldset {
+	margin-bottom: 30px;
+}
+
+/* Tablet Responsive */
+@media (min-width: 550px) {
+	#compteform input, #compteform textarea {
+		width: 60%;
+	}
+
+	#compteform label {
+		margin-left: 110px;
+	}
+}
+
+/* Desktop Responsive */
+@media (min-width: 890px) {
+	#compteform input, #compteform textarea {
+		width: 55%;
+	}
+	#compteform label {
+		margin-left: 200px;
+	}
+}
