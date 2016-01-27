@@ -26,7 +26,7 @@
 				<div class="col-sm-12 col-xs-12">
 					<a href="<?= $this->url('register') ?>" title="Page d'inscription">Créer un compte</a>
 					<a href="<?= $this->url('forgetpassword') ?>" title="Page du mot de passe oublié">Mot de passe oublié ?</a>
-				<div class="col-sm-12 col-xs-12">
+				</div>
 			</div>
 		</fieldset>
 

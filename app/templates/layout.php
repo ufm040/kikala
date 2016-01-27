@@ -17,7 +17,7 @@
 
 		<div class="row">
 			<div class="col-sm-4 col-xs-12">
-				<h1><a href="<?php echo $this->url('home')?>" title="Accueil">Kikala !</a></h1>
+				<h1><a href="<?= $this->url('home')?>" title="Accueil">Kikala !</a></h1>
 			</div>	
 			<div class="col-sm-8 col-xs-12">
 				<div id="headconnect">
