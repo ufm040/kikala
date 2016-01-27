@@ -47,8 +47,6 @@ class FormationController extends Controller
 	 */
 	public function formationregister()
 	{
-
-		var_dump($_SESSION);
 		$error = array() ;
 		if ($_POST) {
 			$title = $_POST['title'];
@@ -76,37 +74,20 @@ class FormationController extends Controller
 				$error = $validator ->getErrors();
 				$isValid = false;		
 			}
-	 
+
 			if($_FILES['image']['size']!= 0) {
-				$file_info = finfo_open(FILEINFO_MIME_TYPE);
-				$infos = finfo_file($file_info, $_FILES['image']['tmp_name']);
+				$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/formations/src/');
+				$file->uploadFile();
 
-				finfo_close($file_info);
-
-				if ($_FILES['image']['error'] ) {
-					$error = array('image'=> "Erreur dans le téléchargement du fichier" );
+				if (!$file->isValid()) {
 					$isValid = false;
-				}
-				elseif ( !in_array($infos, ['image/jpg', 'image/jpeg', 'image/gif','image/png']) ) {
-					$error = array('image'=> "Extension non authorisée pour le fichier ") ;
-					$isValid = false;				
+					$error = array('image'=> $file->getErrors() );	
 				} else {
-					$tmp_name = $_FILES['image']['tmp_name'];
-					$ext = substr($infos, 6);
-
-					$file_name = uniqid(). '.' .$ext;  ;
-					$target = 'assets/img/formations/src/' . $file_name;
-					move_uploaded_file($tmp_name, $target);	
-
-					// fait la réduction au format thumbnail
-					$img = new \abeautifulsite\SimpleImage($target);
-					$img->fit_to_width(300);
-					$img->save();
-					$img->thumbnail(100, 75);
-					$img->save('assets/img/formations/thumbnail/' . $file_name);
-					$error['image'] = 'img/formations/src/' . $file_name;
-					$_SESSION['image_formation'] = $file_name;
-				}	
+					// transforme le fichier au bon format
+					$file->reduceImage('assets/img/formations/thumbnail/');
+					$error['image'] = 'img/formations/src/' . $file->getFileName();
+					$_SESSION['image_formation'] = $file->getFileName();
+				}
 			}
 
 

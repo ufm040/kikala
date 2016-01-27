@@ -16,6 +16,7 @@ class UserController extends Controller
 		$passwordError = "";	
 		// formulaire soumis ?
 		if($_POST){
+
 			if (!empty($_POST)) {
 				$username = $_POST['username'];
 				$email = $_POST['email'];
@@ -24,11 +25,11 @@ class UserController extends Controller
 				$lastname = $_POST['lastname'];
 				$firstname = $_POST['firstname'];
 				$birthyear = $_POST['birthyear'];
-				$sex = $_POST['sex'];
+				//$sex = $_POST['sex'];
+				$sex = 'M';
 				$job = $_POST['job'];
 				$instructorDescription = $_POST['instructorDescription'];
 				$studentDescription = $_POST['studentDescription'];
-				$image = $_POST['image'];
 
 				// validation des données => à coder
 				$isValid = true;
@@ -48,15 +49,19 @@ class UserController extends Controller
 					$passwordError = 'Les mots de passe ne correspondent pas !';
 				}
 
-				// erreur pour l'upload d'image
-				if ( !in_array($extension, ['jpg', 'jpeg', 'gif', 'png']) )
-						die('Extension non autorisée !');
+				// upload du fichier 
+				if($_FILES['image']['size']!= 0) {
+					$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/users/');
 
-					$tmp_name = $_FILES['image']['tmp_name'];
-					$newname =  uniqid() . '-' . $_FILES['image']['name'];
-					$target = 'public/assets/img' . $newname;
+					$file->uploadFile();
 
-					move_uploaded_file($tmp_name, $target); 
+					if (!$file->isValid()) {
+						$isValid = false;
+						$fileError = $file->getErrors();	
+					}					
+				}
+
+
 
 				// si c'est valide 
 				if	($isValid) {

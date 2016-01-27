@@ -73,7 +73,7 @@
 
 				<div class="col-sm-12 col-xs-12">		
 					<label for="image">Choisir une image de profil</label>
-					<input type="file" name="image" />
+					<input type="file" id="image" name="image" placeholder="Votre profil" accept="image/*">
 				</div>
 			</div>
 		</fieldset>
