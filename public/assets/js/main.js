@@ -46,7 +46,9 @@ $("#dateform").datepicker({
 
 
 $('#duration').timepicker({
-  'language':'fr'
+  'language':'fr',
+  'showMeridian':false,
+  'defaultTime':'01:00'
 });
 
 
