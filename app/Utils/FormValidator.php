@@ -3,7 +3,7 @@
 namespace Utils;
 
 
-class FormationValidator {
+class FormValidator {
 
 	private $errors;
     private $isValid;

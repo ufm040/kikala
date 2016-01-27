@@ -62,7 +62,7 @@ class FormationController extends Controller
 			$isValid = true;
 
 			// Contrôle des champs obligatoires sur la formation
-			$validator = new \Utils\FormationValidator();
+			$validator = new \Utils\FormValidator();
 
 			$validator->validateNotEmpty($title,"title","Saisissez un titre !");	 
 			$validator->validateNotEmpty($description,"description","Saisissez une description !");	 
@@ -81,7 +81,7 @@ class FormationController extends Controller
 
 				if (!$file->isValid()) {
 					$isValid = false;
-					$error = array('image'=> $file->getErrors() );	
+					$error['image'] =  $file->getErrors() ;	
 				} else {
 					// transforme le fichier au bon format
 					$file->reduceImage('assets/img/formations/thumbnail/');

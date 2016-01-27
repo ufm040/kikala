@@ -63,11 +63,12 @@ fieldset > fieldset {
 }
 
 
-#formationform p.error {
+#formationform p.error , #compteform p.error{
 	color : red;
 }
 
-#formationform .error > input , #formationform .error > textarea {
+#formationform .error > input , #formationform .error > textarea ,
+#compteform .error > input , #compteform .error > textarea {
 	border: 1px solid red;
 }
 
