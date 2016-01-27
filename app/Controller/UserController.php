@@ -98,6 +98,7 @@ class UserController extends Controller
 					"job" => $job,
 					"instructorDescription" => $instructorDescription,
 					"studentDescription" => $studentDescription,
+					"credit"=>2,
 					"image" => $_SESSION['image_user'],
 					"dateCreated" => date("Y-m-d H:i:s")
 				]);
@@ -133,7 +134,7 @@ class UserController extends Controller
 			}
 
 			// on redirige ensuite l'utilisateur vers la page "Mon compte : accueil"
-			$this->redirectToRoute("");
+			$this->redirectToRoute("home");
 		}
 		// mauvais identifiant
 		else {
@@ -207,5 +208,19 @@ class UserController extends Controller
 		$this->show('user/newpassword',[
 			"passwordError" => $passwordError
 			]);
+	}
+
+
+	public function detailAccount($username) 
+	{
+		
+		// 1 - on crée l'instance 
+		$userManager = new \Manager\UserManager();
+
+		// 2 - on récupère les données du user
+		$user = $userManager->find($_SESSION['user']['id']);
+		// 3 - on affiche la page
+		$this->show('user/detail_account', ['user'=>$user]);
+
 	}
 }

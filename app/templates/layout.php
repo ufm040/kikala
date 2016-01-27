@@ -23,7 +23,7 @@
 			<div class="col-sm-8 col-xs-12">
 				<div id="headconnect">
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="#" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
+						<a href="<?= $this->url('detail_account' ,['username' => $_SESSION['user']['username']]) ?>" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
 					</div>
 					<div class="col-sm-6 col-xs-6 yo">
 
@@ -68,6 +68,6 @@
 
 	<!-- Script du site-->
 	<script src="<?= $this->assetUrl('js/main.js') ?>"></script>
-	
+
 </body>
 </html>
