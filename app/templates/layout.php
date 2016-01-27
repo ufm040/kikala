@@ -15,7 +15,7 @@
 <body>
 	<div class="container-fluid">
 		<header>
-
+		<?php var_dump($_COOKIE) ;?>
 		<div class="row">
 			<div class="col-sm-4 col-xs-12">
 				<h1><a href="<?php echo $this->url('home')?>" title="Accueil">Kikala !</a></h1>
@@ -23,10 +23,18 @@
 			<div class="col-sm-8 col-xs-12">
 				<div id="headconnect">
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
+						<?php if ($w_user['id']) {?> 
+							<a href="<?= $this->url('detail_account')?>" title="Connexion"><i class="fa fa-power-off"></i>Mon Compte</a>
+						<?php } else { ?>
+							<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
+						<?php }	?>
 					</div>
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
+						<?php if ($w_user['id']) {?> 
+							<a href="<?= $this->url('logout')?>" title="Inscription"><i class="fa fa-user"></i>Déconnexion</a>
+						<?php } else { ?>
+							<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
+						<?php }	?>
 					</div>
 				</div>			
 			</div>

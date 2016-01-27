@@ -18,7 +18,7 @@
 				
 				<div class="checkbox-inline">
 					<label>
-						<input type ="checkbox" value="stayLogin" />
+						<input type ="checkbox" value="stayLogin" name="stayLogin"/>
 						Rester connecté ?
 					</label>
 				</div>

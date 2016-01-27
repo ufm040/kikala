@@ -120,6 +120,12 @@ class UserController extends Controller
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
+			if ($_POST['stayLogin']) {
+				$stayLogin = true;
+			} else {
+				$stayLogin = false;	
+			}
+
 			$authentificationManager = new \W\Security\AuthentificationManager;
 			$result = $authentificationManager->isValidLoginInfo($email, $password);
 			
@@ -131,6 +137,13 @@ class UserController extends Controller
 
 				// on le connecte
 				$authentificationManager->logUserIn($user);
+
+				// on crée un cookies si l'utilisateur veut rester connecté
+
+				if($stayLogin) {
+					$value = $user['id'];
+					setcookie("KikalaCookie", $value, time()+3660);
+				}
 			}
 
 			// on redirige ensuite l'utilisateur vers la page "Mon compte : accueil"
@@ -152,9 +165,9 @@ class UserController extends Controller
 
 	public function logout()
 	{
-		$userManager = new \Manager\UserManager();
-		// vérification que l'utilisateur est bien connecté
-		
+		$userSecurity = new \W\Security\AuthentificationManager();
+		// Déconnecte l'utiliasteur 
+		$userSecurity ->logUserOut();
 		// affiche la page
 		$this->show('user/logout');
 	}
