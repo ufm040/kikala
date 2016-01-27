@@ -14,11 +14,9 @@
 		['GET|POST', '/compte/nouveau-mot-de-passe/', 'User#newpassword', 'newpassword'],
 		['GET', '/compte/account/[:username]/', 'User#detailAccount', 'detail_account'],
 
-
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
 		['GET', '/formation/liste/', 'Formation#listFormations', 'list_formations'],
+
 		['GET', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
 	);
-
-	

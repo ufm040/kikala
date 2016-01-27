@@ -3,13 +3,24 @@
 <?php $this->start('main_content') ?>
 	<h2>Nouveau mot de passe</h2>
 
-	<form method="POST" novalidate>
+	<form id="newpasswordform" method="POST" novalidate>
+		<fieldset>
+			<div class="row">
+				<div class="col-sm-12 col-xs-12">
+					<label for="newpassword">Nouveau mot de passe</label>
+					<input type="password" placeholder="Nouveau mot de passe" name="newpassword" />
+				</div>
 
-		<input type="password" placeholder="Nouveau mot de passe" name="password" />
+				<div class="col-sm-12 col-xs-12">
+					<label for="newpasswordConfirm">Confirmation du nouveau mot de passe</label>
+					<input type="password" placeholder="Confirmation du nouveau mot de passe" name="newpasswordConfirm" />
+				</div>
+			</div>
+		</fieldset>
 
-		<input type="password" placeholder="Confirmation du nouveau mot de passe" name="passwordConfirm" />
-
-		<button type="submit">Valider</button>
+		<fieldset>
+			<button type="submit" class="btn btn-info">Je valide !</button>
+		</fieldset>
 
 	</form>
 <?php $this->stop('main_content') ?>

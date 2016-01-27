@@ -165,49 +165,45 @@ class UserController extends Controller
 
 	public function forgetpassword()
 	{
+		/*$email = $_POST['email'];
 
+		// vérifie qu'il existe
+		$userManager = new \Manager\UserManager();
+		$user = $userManager->getUserByUsernameOrEmail($email);
+
+		if($user){
+
+			// phpMailer
+			$token = \W\Security\StringUtils::randomString(32);
+
+			$userManager->update([
+				'token' => $token,
+				'dateModified'=> date("Y-m-d H:i:s")
+				], $user['id']);
+			$resetLink = $this->generateUrl('newpassword', [
+				'token' => $token,
+				'email' => $email
+				], true);
+
+			// envoie du resetLink
+		}*/
+
+		$this->show('user/forgetpassword');
 	}
 
 	/**
 	 * Page du nouveau mot de passe
 	 */
 
-	public function newpassword()
+	public function newpassword($token, $email)
 	{
-		$passwordError = "";	
-		// formulaire soumis ?
-		if ($_POST) {
-			$password = $_POST['password'];
-			$passwordConfirm = $_POST['passwordConfirm'];
-			
-			// validation des données => à coder
-			$isValid = true;
-
-			// 1 - on crée l'instance 
-			$userManager = new \Manager\UserManager();
-
-			if($password != $passwordConfirm) {
-				$isValid = false;
-				$passwordError = 'Les mots de passe ne correspondent pas !';
-			}
-			
-			// si c'est valide 
-			if	($isValid) {
-				
-				// on modifie le mdp en base de données
-				// 2 - on appelle la méthode update (dans la doc regardez dans gestionnaires)
-				$userManager->update([
-					"password" => password_hash($password,PASSWORD_DEFAULT),
-				]);
-				// on redirige l'utilisateur vers la page "formation en cours"
-				$this->redirectToRoute("");
-			} 
-		}
-
-		// affiche la page
-		$this->show('user/newpassword',[
-			"passwordError" => $passwordError
-			]);
+		/* 
+		$userManager = new \Manager\UserManager();
+		$user = $userManager->getUserByUsernameOrEmail($email);
+		if($user['token'] == $token){
+			// affiche le formulaire */
+			$this->show('user/newpassword');
+		
 	}
 
 

@@ -3,7 +3,7 @@
 <?php $this->start('main_content') ?>
 	<h2>Inscription</h2>
 
-	<form id ="compteform" method="POST" novalidate enctype="multipart/form-data">
+	<form id="registerform" method="POST" novalidate enctype="multipart/form-data">
 		<fieldset>
 			<div class="row">
 				<div class="col-sm-12 col-xs-12">	
@@ -47,7 +47,7 @@
 					<input type="date" placeholder="Année de naissance" name="birthyear" value="<?= (!empty($_POST['birthyear'])) ? $_POST['birthyear'] : '' ;?>"/>
 					<p class="error"><?= (!empty($error['birthyear'])) ? $error['birthyear'] : '' ;?></p>
 				</div>
-				
+
 				<div class="col-sm-12 col-xs-12">
 					<div class="radio-inline">
 					  <label for="sex">

@@ -23,12 +23,10 @@
 			<div class="col-sm-8 col-xs-12">
 				<div id="headconnect">
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="<?= $this->url('detail_account' ,['username' => $_SESSION['user']['username']]) ?>" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
+						<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
 					</div>
 					<div class="col-sm-6 col-xs-6 yo">
-
-						<a href="<?= $this->url('register') ?>" title="Inscription"><i class="fa fa-power-off"></i>Je m'inscris</a>
-
+						<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
 					</div>
 				</div>			
 			</div>
