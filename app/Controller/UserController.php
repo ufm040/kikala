@@ -13,85 +13,100 @@ class UserController extends Controller
 
 	public function register()
 	{
-		$passwordError = "";	
+		$error = array() ;	
 		// formulaire soumis ?
 		if($_POST){
-			if (!empty($_POST)) {
-				$username = $_POST['username'];
-				$email = $_POST['email'];
-				$password = $_POST['password'];
-				$passwordConfirm = $_POST['passwordConfirm'];
-				$lastname = $_POST['lastname'];
-				$firstname = $_POST['firstname'];
-				$birthyear = $_POST['birthyear'];
-				$sex = $_POST['sex'];
-				$job = $_POST['job'];
-				$instructorDescription = $_POST['instructorDescription'];
-				$studentDescription = $_POST['studentDescription'];
-				$image = $_POST['image'];
+			$username = $_POST['username'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$passwordConfirm = $_POST['passwordConfirm'];
+			$lastname = $_POST['lastname'];
+			$firstname = $_POST['firstname'];
+			$birthyear = $_POST['birthyear'];
+			$sex = $_POST['sex'];
+			$job = $_POST['job'];
+			$instructorDescription = $_POST['instructorDescription'];
+			$studentDescription = $_POST['studentDescription'];
 
-				// validation des données => à coder
-				$isValid = true;
+			// validation des données => à coder
+			$isValid = true;
 
+			// Contrôle des champs obligatoires sur la formation
+			$validator = new \Utils\FormValidator();
+
+			$validator->validateNotEmpty($username,"username","Le Pseudo est obligatoires !");	 
+			$validator->validateNotEmpty($email,"email","L'email est obligatoires !");	 
+			$validator->validateNotEmpty($password,"password","Choississez un mot de passe");	
+			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Resaisir le mot de passe");	
+			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
+			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
+			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
+			$validator->validateNotEmpty($job,"job","Saisir votre Métier");	
+
+			if ( !$validator->isValid()) {
+				$error = $validator ->getErrors();
+				$isValid = false;		
+			}
+
+			if ($isValid) {
 				// 1 - on crée l'instance 
 				$userManager = new \Manager\UserManager();
 
 				//  erreur pour le mail (déjà existant)
 				if ($userManager->emailExists($email)) {
 					$isValid = false;
-					$passwordError = 'Email déjà utlisé !';
+					$error['email'] = 'Email déjà utlisé !';
 				}
 
 				// erreur sur le mdp
 				if($password != $passwordConfirm) {
 					$isValid = false;
-					$passwordError = 'Les mots de passe ne correspondent pas !';
-				}
-
-				// erreur pour l'upload d'image
-				if ( !in_array($extension, ['jpg', 'jpeg', 'gif', 'png']) )
-						die('Extension non autorisée !');
-
-					$tmp_name = $_FILES['image']['tmp_name'];
-					$newname =  uniqid() . '-' . $_FILES['image']['name'];
-					$target = 'public/assets/img' . $newname;
-
-					move_uploaded_file($tmp_name, $target); 
-
-				// si c'est valide 
-				if	($isValid) {
-					// on insère en base de données
-					// 2 - on appelle la méthode insert
-					$userManager->insert([
-						"username" => $username,
-						"email" => $email ,
-						"password" => password_hash($password,PASSWORD_DEFAULT),
-						"lastname" => $lastname,
-						"firstname" => $firstname,
-						"birthyear" => $birthyear,
-						"sex" => $sex,
-						"job" => $job,
-						"instructorDescription" => $instructorDescription,
-						"studentDescription" => $studentDescription,
-						"image" => $image,
-						"dateCreated" => date("Y-m-d H:i:s")
-					]);
-					// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
-					$this->redirectToRoute("home");
-				}
-
-			} else {
-				$passwordError = "Tous les champs doivent être remplis.";
+					$error['passwordConfirm'] = 'Les mots de passe ne correspondent pas !';
+				}					
 			}
 
-		} else {
-			$passwordError = "Le formulaire n'a pas été correctement validé.";
-		}
 
-		// affiche la page
-		$this->show('user/register',[
-			"passwordError" => $passwordError
-			]);
+			// upload du fichier 
+			if($_FILES['image']['size']!= 0) {
+				$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/users/');
+
+				$file->uploadFile();
+
+				if (!$file->isValid()) {
+					$isValid = false;
+					$error['image'] = $file->getErrors();	
+				}  else {
+					$error['image'] = 'img/users/' . $file->getFileName();
+					$_SESSION['image_user'] = $file->getFileName();
+				}						
+			}
+
+
+
+			// si c'est valide 
+			if	($isValid) {
+				// on insère en base de données
+				// 2 - on appelle la méthode insert
+				$userManager->insert([
+					"username" => $username,
+					"email" => $email ,
+					"password" => password_hash($password,PASSWORD_DEFAULT),
+					"lastname" => $lastname,
+					"firstname" => $firstname,
+					"birthyear" => $birthyear,
+					"sex" => $sex,
+					"job" => $job,
+					"instructorDescription" => $instructorDescription,
+					"studentDescription" => $studentDescription,
+					"credit"=>2,
+					"image" => $_SESSION['image_user'],
+					"dateCreated" => date("Y-m-d H:i:s")
+				]);
+				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
+				$this->redirectToRoute("home");
+			} 
+		}
+		$this->show('user/register',['error' => $error]);
 	}
 
 	/**
@@ -119,7 +134,7 @@ class UserController extends Controller
 			}
 
 			// on redirige ensuite l'utilisateur vers la page "Mon compte : accueil"
-			$this->redirectToRoute("");
+			$this->redirectToRoute("home");
 		}
 		// mauvais identifiant
 		else {
@@ -189,5 +204,19 @@ class UserController extends Controller
 			// affiche le formulaire */
 			$this->show('user/newpassword');
 		
+	}
+
+
+	public function detailAccount($username) 
+	{
+		
+		// 1 - on crée l'instance 
+		$userManager = new \Manager\UserManager();
+
+		// 2 - on récupère les données du user
+		$user = $userManager->find($_SESSION['user']['id']);
+		// 3 - on affiche la page
+		$this->show('user/detail_account', ['user'=>$user]);
+
 	}
 }

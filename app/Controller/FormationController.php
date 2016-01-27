@@ -7,8 +7,26 @@ use \W\Controller\Controller;
 class FormationController extends Controller
 {
 
+
 	/**
-	 * Page Lsite des formations
+	 * Page Détail d'une formation
+	 */	
+
+
+	public function detailFormation($id){
+
+		$formationManager = new \Manager\FormationManager();
+
+		$formation = $formationManager->find($id);
+
+		$this->show('formation/detail_formation',[
+			"formation" => $formation
+		]);		
+
+	}	
+
+	/**
+	 * Page Liste des formations
 	 */	
 
 
@@ -29,9 +47,7 @@ class FormationController extends Controller
 	 */
 	public function formationregister()
 	{
-
-
-		$error = [];
+		$error = array() ;
 		if ($_POST) {
 			$title = $_POST['title'];
 			$description= $_POST['description'];
@@ -44,33 +60,48 @@ class FormationController extends Controller
 			$country = $_POST['country'];
 
 			$isValid = true;
+
+			// Contrôle des champs obligatoires sur la formation
+			$validator = new \Utils\FormValidator();
+
+			$validator->validateNotEmpty($title,"title","Saisissez un titre !");	 
+			$validator->validateNotEmpty($description,"description","Saisissez une description !");	 
+			$validator->validateNotEmpty($dateform,"dateform","Saisissez une date !");	 
+			$validator->validateNotEmpty($duration,"duration","Saisissez une durée !");	 
+			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisissez un nombre de place !");
+
+			if ( !$validator->isValid()) {
+				$error = $validator ->getErrors();
+				$isValid = false;		
+			}
+
 			if($_FILES['image']['size']!= 0) {
-				$file_info = finfo_open(FILEINFO_MIME_TYPE);
-				$infos = finfo_file($file_info, $_FILES['image']['tmp_name']);
+				$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/formations/src/');
+				$file->uploadFile();
 
-				finfo_close($file_info);
-
-				var_dump($infos);
-
-				if ($_FILES['image']['error'] ) {
-					$error['image'] = "Erreur dans le téléchargement du fichier" ;
+				if (!$file->isValid()) {
 					$isValid = false;
-				}
-				elseif ( !in_array($infos, ['image/jpg', 'image/jpeg', 'image/gif','image/png']) ) {
-					$error['image'] = "Extension non authorisée pour le fichier " ;
-					$isValid = false;				
+					$error['image'] =  $file->getErrors() ;	
 				} else {
-					$tmp_name = $_FILES['image']['tmp_name'];
-					$target = 'assets/img/formations/' . uniqid() . '.' . $_FILES['image']['name'];
-					move_uploaded_file($tmp_name, $target);	
-				}	
-			}		
-			$newformation = new \Manager\FormationManager();
+					// transforme le fichier au bon format
+					$file->reduceImage('assets/img/formations/thumbnail/');
+					$error['image'] = 'img/formations/src/' . $file->getFileName();
+					$_SESSION['image_formation'] = $file->getFileName();
+				}
+			}
 
-			$date = \DateTime::createFromFormat('j/m/Y', $dateform);
 
 			if	($isValid) {
-					// on insère en base de données
+
+				$newformation = new \Manager\FormationManager();
+				$date = \DateTime::createFromFormat('j/m/Y', $dateform);
+				$title = $validator->convertSpecialCaractere($title);
+				$description = $validator->convertSpecialCaractere($description);
+				if ($_SESSION['image_formation']) {
+					$file_name = $_SESSION['image_formation']; 
+				} else {
+					$file_name = ''	;
+				} 
 
 				// 2 - on appelle la méthode insert
 				$newformation->insert([
@@ -80,20 +111,23 @@ class FormationController extends Controller
 					"userId" => 1,
 					"dateCreated" => date("Y-m-d H:i:s"),
 					"description" =>$description,
-					"image" => $target,
+					"image" => $file_name,
 					"totalNumberPlace" => $nbrplace,
 					"address" => $address,
 					"zip" => $zip,
 					"city" => $city,
 					"country" => $country
 				]);
+
+				unset($_SESSION['image_formation']);
+				$id = $newformation->lastInsertFormation()['id'];
+
+
 				// on redirige l'utilisateur vers la page
-				$this->redirectToRoute("home");
+				$this->redirectToRoute("detail_formation",['id'=>$id]);
 			}			
-
 		}
-
-		$this->show('formation/formationregister');
+		$this->show('formation/formationregister' ,  ['error' => $error]);
 	}
 
 }
