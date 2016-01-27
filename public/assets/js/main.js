@@ -45,12 +45,9 @@ $("#dateform").datepicker({
 });
 
 
-/*$('#duration').timepicker({
-    minuteStep: 1,
-    template: 'modal',
-    appendWidgetTo: 'body',
-    showSeconds: false,
-    showMeridian: false,
-    defaultTime: false
+$('#duration').timepicker({
+  'language':'fr'
 });
-*/
+
+
+

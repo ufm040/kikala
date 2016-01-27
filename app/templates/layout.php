@@ -7,7 +7,8 @@
 	<link href='https://fonts.googleapis.com/css?family=Economica:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/font-awesome.min.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
-	<link rel="stylesheet" href="<?= $this->assetUrl('css/datepicker.css') ?>">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap-datepicker.min.css') ?>">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap-timepicker.min.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/styleformation.css') ?>">
 </head>
@@ -58,14 +59,15 @@
 	</div>
 
 	<script src="<?= $this->assetUrl('js/jquery-2.1.4.js') ?>"></script>
-	<!-- pour le datepicker jQuery UI -->
-	<script src="<?= $this->assetUrl('js/bootstrap.min.js') ?>"></script>
 
-	
+	<!-- pour le datepicker jQuery UI - Bootstrapt -->
+	<script src="<?= $this->assetUrl('js/bootstrap.min.js') ?>"></script>	
 	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.js') ?>"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap-datepicker.fr.js') ?>"></script>	
+	<script src="<?= $this->assetUrl('js/bootstrap-timepicker.min.js') ?>"></script>	
 
-
+	<!-- Script du site-->
 	<script src="<?= $this->assetUrl('js/main.js') ?>"></script>
+	
 </body>
 </html>
