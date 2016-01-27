@@ -22,10 +22,10 @@
 			<div class="col-sm-8 col-xs-12">
 				<div id="headconnect">
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="#" title="Mon compte"><i class="fa fa-user"></i>Mon compte</a>
+						<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
 					</div>
 					<div class="col-sm-6 col-xs-6 yo">
-						<a href="#" title="Inscription"><i class="fa fa-power-off"></i>Je m'inscris</a>
+						<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
 					</div>
 				</div>			
 			</div>
@@ -47,9 +47,9 @@
 			<nav id="footermenu" class="clearfix">
 				<ul>
 					<li><a href="<?php echo $this->url('home')?>" title="Accueil">Accueil</a></li>
-					<li><a href="#" title="A propos">A propos</a></li>
-					<li><a href="#" title="Mentions Légales">Mentions Légales</a></li>
-					<li><a href="#" title="Inscription">Inscription</a></li>
+					<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
+					<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
+					<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
 
 				</ul>
 			</nav>			

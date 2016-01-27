@@ -1,10 +1,10 @@
+/* Mobile Responsive */
 html, body {
 	font-family: 'Economica',Arial,sans-serif;
 	background-color: #FFF;
 	color: #5D5D5D;
 	font-size: 14px;
 }
-
 
 a {
 	text-decoration: none;
@@ -16,12 +16,17 @@ a:hover {
 	text-decoration: none;
 }
 
+/*.homecase a:hover {
+	background-color: #E25B34;
+}*/
+
 h1 {
 	color: #F92672;
 }
 
 h2 {
-	color: #fff;
+	text-align: center;
+	margin-bottom: 50px;
 }
 
 .clearfix::after {
@@ -55,8 +60,8 @@ header h1 {
 	padding: 10px 5px;
 	border-radius: 3px;
 	background-color: #E25B34;
-	margin: 30px 5px 20px;
-	width: 60%;
+	margin: 30px 0 20px 5px;
+	width: 100%;
 }
 
 
@@ -95,8 +100,6 @@ header h1 a:hover {
 	border-radius: 2px;
 }
 
-
-
 #headmenu li {
 	background-color: #709EA9;
 	padding: 10px 0;
@@ -123,7 +126,7 @@ header h1 a:hover {
 
 		
 #homepage h2 {
-	font-size: 4em;
+	font-size: 3em;
 	color: #E25B34;
 	font-weight: 400;
 	text-shadow: 0px 1px 4px #BC8484;
@@ -165,6 +168,14 @@ header h1 a:hover {
 	}	
 }
 
+/****************************/
+/* About Page + Legals Page */
+/****************************/
+p {
+	font-size: 20px;	
+}
+
+
 /**********************/
 /*   Footer           */
 /**********************/
@@ -173,7 +184,7 @@ footer {
 	background-color: #333333;
 }
 
-#footermenu  ul{
+#footermenu ul{
 	margin : auto;
 	width:99%;
 }
@@ -199,20 +210,34 @@ footer {
 	color:#6B6B6A;
 }
 
+/* Tablet Responsive */
+@media (min-width: 550px) {
+	/* header */
+	#headconnect {
+		width: 55%;
+	}
 
-/*********************/
-/* Responive         */
-/*********************/
+	/* home page */
+	#homepage h2 {
+	font-size: 4em;
+	}
+}
 
-@media (min-width: 900px) {
+/* Desktop Responsive */
+@media (min-width: 890px) {
 
 	#headmenu {
-		width:980px;
+		width:950px;
 	} 
 	#homepage {
 		width: 80%;
 	}
+
+	#headconnect {
+		width: 60%;
+	}
+
 	#headconnect a {	
 		font-size: 1.2em;
 	}
-}  
+} 

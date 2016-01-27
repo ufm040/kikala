@@ -22,12 +22,12 @@
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					<a href="#" title="inscription">Inscription</a>
+					<a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a>
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					<a href="#" title="connxion">Connexion</a>
+					<a href="<?= $this->url('login') ?>" title="Connexion">Connexion</a>
 				</div>	
 			</div>
 		</div>

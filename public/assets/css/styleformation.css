@@ -3,21 +3,88 @@
 /*      formation          */
 /***************************/
 
+/* Mobile Responsive */
+label {
+	font-size: 17px;
+}
 
-#formationform input , #formationform textarea {
+#formationform input, #formationform textarea, #registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
 	display: block;
 	margin: 10px auto;
 	width: 80%;
 	padding: 5px 0 5px 3px;
 }
 
+#formationform .btn, #registerform .btn, #loginform .btn,#forgetpasswordform .btn, #newpasswordform .btn {
+    display: block;
+    margin: 20px auto auto;
+    width: 40%;
+}
+
+/* page inscription + page connexion */
+#registerform .btn, #loginform .btn, #forgetpasswordform .btn, #newpasswordform .btn {
+	margin-bottom: 30px;
+}
+
+#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+	margin-left: 30px;
+}
+
+/* page création formation */
 #formationform {
 	margin-bottom: 30px;
 }
 
-#formationform .btn {
-    display: block;
-    margin: 20px auto auto;
-    width: 30%;
+/* page inscription*/
+
+/* page connexion */
+#loginform a {
+	color: #E25B34;
+	margin-bottom: 20px;
 }
 
+#loginform a:hover {
+	color: #F0F2F6;
+}
+
+
+/* Mini Tablet Responsive */
+@media (min-width: 450px) {
+	/* page connexion */
+	#loginform div:nth-child(4) {
+		padding-left: 25%;
+	}
+}
+
+/* Tablet Responsive */
+@media (min-width: 550px) {
+	/* page inscription + page connexion */
+	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
+		width: 60%;
+	}
+
+	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+		margin-left: 110px;
+	}
+
+	/* page connexion */
+	#loginform div:nth-child(4) {
+		padding-left: 15%;
+	}
+}
+
+/* Desktop Responsive */
+@media (min-width: 890px) {
+	/* page inscription + page connexion */
+	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
+		width: 55%;
+	}
+	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+		margin-left: 200px;
+	}
+	
+	/* page connexion */
+	#loginform div:nth-child(4) {
+		padding-left: 110px;
+	}
+}
