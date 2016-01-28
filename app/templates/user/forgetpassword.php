@@ -9,6 +9,7 @@
 				<div class="col-sm-12 col-xs-12">
 					<label for="email">Email</label>
 					<input type="email" placeholder="Email" name="email" />
+					<p class="error"><?= (!empty($error)) ? $error : '' ;?></p>
 				</div>
 			</div>
 		</fieldset>

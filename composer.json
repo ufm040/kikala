@@ -10,7 +10,9 @@
         "ircmaxell/random-lib": "^1.1",
         "ircmaxell/password-compat": "^1.0",
         "league/url": "^3.3",
-        "abeautifulsite/simpleimage":"^2.0"
+        "abeautifulsite/simpleimage":"^2.0",
+        "phpmailer/phpmailer": "~5.2"
+
     },
     "autoload": {
         "psr-4": {
