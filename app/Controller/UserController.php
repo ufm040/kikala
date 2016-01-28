@@ -43,6 +43,11 @@ class UserController extends Controller
 			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
 			$validator->validateNotEmpty($job,"job","Saisir votre Métier");	
 
+			$validator->validateEmail($email,"email","L'email est incorrect !");
+			$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
+			$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits");
+
+
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();
 				$isValid = false;		
@@ -56,6 +61,11 @@ class UserController extends Controller
 				if ($userManager->emailExists($email)) {
 					$isValid = false;
 					$error['email'] = 'Email déjà utlisé !';
+				}
+
+				if ($userManager->usernameExists($username)) {
+					$isValid = false;
+					$error['username'] = 'Ce Pseudo est déjà utlisé !';					
 				}
 
 				// erreur sur le mdp
@@ -162,7 +172,7 @@ class UserController extends Controller
 					$token = \W\Security\StringUtils::randomString(32);
 					// hask du tocken et json_encode du value du cookies
 					$tokenHash = password_hash($token,PASSWORD_DEFAULT);
-					$value = json_encode(["id"=>$user['id'] , "token" =>$tokenHash]) ;
+					$value = json_encode(["id"=>$user['id'] , "token" =>$token]) ;
 					setcookie("kikala_remember_me", $value, time()+3660,'/');
 
 					// MAJ de la BDD avec le token du cookie
@@ -204,7 +214,7 @@ class UserController extends Controller
 
 	public function forgetpassword()
 	{
-		
+		$error = '';
 		if ($_POST) {
 			$email = $_POST['email'];
 
@@ -238,11 +248,13 @@ class UserController extends Controller
 					var_dump($resetLink) ;
 				}
 				die();
+			} else {
+				$error = 'Email non connu dans la base';	
 			}			
 		}
 
 
-		$this->show('user/forgetpassword');
+		$this->show('user/forgetpassword',['error'=>$error]);
 	}
 
 	/**
@@ -305,13 +317,31 @@ class UserController extends Controller
 	public function detailAccount($username) 
 	{
 		
-		// 1 - on crée l'instance 
+		//  on crée l'instance UserManager 
 		$userManager = new \Manager\UserManager();
 
+		// on crée une instance security manager
+		$authentificationManager = new \W\Security\AuthentificationManager;
+
+		// - on récupère l'utilisateur connecté
+		$userConnect = $authentificationManager -> getLoggedUser() ;
+
+		// Contrôle si l'utilisateur connecté n'est pas l'utilisateur du compte demandé
+		// renvoi pas interdit
+		if ( $userConnect['username'] != $username) {
+			$this->showForbidden();	
+		}
+
 		// 2 - on récupère les données du user
-		$user = $userManager->find($_SESSION['user']['id']);
-		// 3 - on affiche la page
-		$this->show('user/detail_account', ['user'=>$user]);
+		$user = $userManager->getUserByUsernameOrEmail($username);
+		// 3 - on affiche la page si user trouvé 
+		if ($user) {
+			$this->show('user/detail_account', ['user'=>$user]);	
+		} else {
+			// sinon page interdite	
+			$this->showForbidden();	
+		}
+		
 
 	}
 }

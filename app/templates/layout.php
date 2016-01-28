@@ -15,7 +15,6 @@
 <body>
 	<div class="container-fluid">
 		<header>
-		<?php var_dump($_COOKIE) ;?>
 		<div class="row">
 			<div class="col-sm-4 col-xs-12">
 				<h1><a href="<?php echo $this->url('home')?>" title="Accueil">Kikala !</a></h1>
@@ -24,7 +23,7 @@
 				<div id="headconnect">
 					<div class="col-sm-6 col-xs-6 yo">
 						<?php if ($w_user['id']) {?> 
-							<a href="<?= $this->url('detail_account',['user'=>$w_user])?>" title="Connexion"><i class="fa fa-power-off"></i>Mon Compte</a>
+							<a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-power-off"></i>Mon Compte</a>
 						<?php } else { ?>
 							<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
 						<?php }	?>

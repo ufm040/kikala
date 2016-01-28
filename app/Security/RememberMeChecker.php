@@ -22,7 +22,7 @@ class RememberMeChecker
 			$user = $userManager->find($cookieData['id']);
 		
 			//si le hash du cookie verifie le hash en bdd
-			if (password_verify($cookieData['token'], $user['tokenCookie'])){
+			if (password_verify($cookieData['token'], $user['tokenCookie'])){	
 				$authentificationManager->logUserIn($user);
 				return true;
 			}
