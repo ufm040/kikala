@@ -44,8 +44,26 @@ class FormValidator {
         }
     }
 
-
     public function convertSpecialCaractere($value) {
         return htmlspecialchars($value, ENT_HTML5);
     }
+
+    public function validateEmail($value,$field,$message) {
+        
+        if ( ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            $this->addError($field,$message);
+        }       
+    } 
+
+    public function validateYear($value,$field,$message) {
+        if (!preg_match("#^(19|20)\d{2}$#", $value)) {
+            $this->addError($field,$message);  
+        }
+    } 
+
+    public function validateCharacter($value,$field,$message) {
+        if (!preg_match("#^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$#", $value)) {
+            $this->addError($field,$message);  
+        }       
+    }      
 }

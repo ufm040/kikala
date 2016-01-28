@@ -36,15 +36,21 @@ class UserController extends Controller
 
 			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");	 
 			$validator->validateNotEmpty($email,"email","L'email est obligatoire !");	 
-			$validator->validateNotEmpty($password,"password","Choisir un mot de passe !");	
-			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe !");	
-			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom !");	
-			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom !");	
-			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance !");
-			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");	
-			$validator->validateNotEmpty($job,"job","Saisir votre métier !");
+			$validator->validateNotEmpty($password,"password","Choisir un mot de passe");	
+			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe");	
+			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
+			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
+			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
+			$validator->validateNotEmpty($job,"job","Saisir votre métier");	
 			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
 			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
+			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
+			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");
+			
+			$validator->validateEmail($email,"email","L'email est incorrect !");
+			$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
+			$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits");
+
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();
@@ -59,6 +65,11 @@ class UserController extends Controller
 				if ($userManager->emailExists($email)) {
 					$isValid = false;
 					$error['email'] = 'Email déjà utlisé !';
+				}
+
+				if ($userManager->usernameExists($username)) {
+					$isValid = false;
+					$error['username'] = 'Ce Pseudo est déjà utlisé !';					
 				}
 
 				// erreur sur le mdp
@@ -82,6 +93,8 @@ class UserController extends Controller
 					$error['image'] = 'img/users/' . $file->getFileName();
 					$_SESSION['image_user'] = $file->getFileName();
 				}						
+			} else {
+				$_SESSION['image_user'] = 'defaultImageUser.png';
 			}
 
 
@@ -90,7 +103,7 @@ class UserController extends Controller
 			if	($isValid) {
 				// on insère en base de données
 				// 2 - on appelle la méthode insert
-				$userManager->insert([
+				$user = $userManager->insert([
 					"username" => $username,
 					"email" => $email ,
 					"password" => password_hash($password,PASSWORD_DEFAULT),
@@ -105,8 +118,20 @@ class UserController extends Controller
 					"image" => $_SESSION['image_user'],
 					"dateCreated" => date("Y-m-d H:i:s")
 				]);
+
+				// on connecte l'utilisateur 
+				if ($user) {
+					$userId = $userManager->lastInsertUser();
+
+					$userConnect = $userManager->find($userId['id']);
+						
+					$userSecurity = new \W\Security\AuthentificationManager();
+					// Connecte l'utiliasteur 
+					$userSecurity ->logUserIn($userConnect);
+
+				}
 				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
-				$this->redirectToRoute("succeedregister");
+				$this->redirectToRoute("home");
 			} 
 		}
 		$this->show('user/register',['error' => $error]);
@@ -118,34 +143,59 @@ class UserController extends Controller
 
 	public function login()
 	{
+		var_dump($_POST);
+		$errorconnect = '';
 		// vérification de la combinaison d'email et mdp présents en bdd
 		if(!empty($_POST)){
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
+			if (isset($_POST['stayLogin'])) {
+				$stayLogin = $_POST['stayLogin'];
+			} else {
+				$stayLogin = false;	
+			}
+
 			$authentificationManager = new \W\Security\AuthentificationManager;
 			$result = $authentificationManager->isValidLoginInfo($email, $password);
-			
+
 			// si identifiants OK
-			if($result){
+			if($result > 0){
 				// on récupère l'email en base de donnée
 				$userManager = new \Manager\UserManager();	
 				$user = $userManager->find($result);
 
 				// on le connecte
 				$authentificationManager->logUserIn($user);
-			}
 
-			// on redirige ensuite l'utilisateur vers la page "Mon compte : accueil"
-			$this->redirectToRoute("home");
+				// on crée un cookies si l'utilisateur veut rester connecté
+
+				if($stayLogin) {
+
+					// création d'un token pour le cookie 
+					$token = \W\Security\StringUtils::randomString(32);
+					// hask du tocken et json_encode du value du cookies
+					$tokenHash = password_hash($token,PASSWORD_DEFAULT);
+					$value = json_encode(["id"=>$user['id'] , "token" =>$token]) ;
+					setcookie("kikala_remember_me", $value, time()+3660,'/');
+
+					// MAJ de la BDD avec le token du cookie
+					$userManager->update([
+						// on hache le token en base de données : Sécurity !
+						'tokenCookie' => $tokenHash 
+						], $user['id']);
+				}
+				$this->redirectToRoute("home");
+
+			} 
+			// mauvais identifiant 
+			else {
+				$errorconnect = "email inconnu ou mot de passe incorrect";	
+			}
 		}
-		// mauvais identifiant
-		else {
 			
-		}			
-		
 		// affiche la page
-		$this->show('user/login');
+		$this->show('user/login',['error'=>$errorconnect]);
 	}
 
 
@@ -155,9 +205,9 @@ class UserController extends Controller
 
 	public function logout()
 	{
-		$userManager = new \Manager\UserManager();
-		// vérification que l'utilisateur est bien connecté
-		
+		$userSecurity = new \W\Security\AuthentificationManager();
+		// Déconnecte l'utilisateur 
+		$userSecurity ->logUserOut();
 		// affiche la page
 		$this->show('user/logout');
 	}
@@ -168,58 +218,134 @@ class UserController extends Controller
 
 	public function forgetpassword()
 	{
-		/*$email = $_POST['email'];
+		$error = '';
+		if ($_POST) {
+			$email = $_POST['email'];
 
-		// vérifie qu'il existe
-		$userManager = new \Manager\UserManager();
-		$user = $userManager->getUserByUsernameOrEmail($email);
+			// vérifie qu'il existe
+			$userManager = new \Manager\UserManager();
+			$user = $userManager->getUserByUsernameOrEmail($email);
 
-		if($user){
+			if($user){
 
-			// phpMailer
-			$token = \W\Security\StringUtils::randomString(32);
+				// phpMailer
+				$token = \W\Security\StringUtils::randomString(32);
 
-			$userManager->update([
-				'token' => $token,
-				'dateModified'=> date("Y-m-d H:i:s")
-				], $user['id']);
-			$resetLink = $this->generateUrl('newpassword', [
-				'token' => $token,
-				'email' => $email
-				], true);
+				$userManager->update([
+					// on hache le token en base de données : Sécurity !
+					'token' => password_hash($token,PASSWORD_DEFAULT)
+					], $user['id']);
+				$resetLink = $this->generateUrl('newpassword', [
+					'token' => $token,
+					'username' => $user['username']
+					], true);
 
-			// envoie du resetLink
-		}*/
+				// envoie du resetLink par mail : appel de la classe SendMail()
+				$mail = new \Utils\EmailSender($user['email']);
+				$mail->setSubject('reset password');
+				$mail->setContentMessage($resetLink);
+				$mail->sendEmail();
 
-		$this->show('user/forgetpassword');
+				if ( ! $mail->getIsSend()) {
+					var_dump('PROBLEME Envoie Mail');
+				} else {
+					var_dump($resetLink) ;
+				}
+				die();
+			} else {
+				$error = 'Email non connu dans la base';	
+			}			
+		}
+
+
+		$this->show('user/forgetpassword',['error'=>$error]);
 	}
 
 	/**
 	 * Page du nouveau mot de passe
 	 */
 
-	public function newpassword($token, $email)
+	public function newpassword($token, $username)
 	{
-		/* 
+		$error = array() ;
+
 		$userManager = new \Manager\UserManager();
-		$user = $userManager->getUserByUsernameOrEmail($email);
-		if($user['token'] == $token){
-			// affiche le formulaire */
-			$this->show('user/newpassword');
-		
+		$user = $userManager->getUserByUsernameOrEmail($username);		
+		if ($user) {
+			if ($_POST) {
+				$isValid = true;
+				$newpassword = $_POST['newpassword'];
+				$newpasswordConfirm = $_POST['newpasswordConfirm'];
+
+				$validator = new \Utils\FormValidator();
+		 
+				$validator->validateNotEmpty($newpassword,"newpassword","Saisir un mot de passe");	
+				$validator->validateNotEmpty($newpasswordConfirm,"newpasswordConfirm","Ressaisir le mot de passe");	
+
+				if ( !$validator->isValid()) {
+					$error = $validator ->getErrors();
+					$isValid = false;		
+				}
+
+				// erreur sur le mdp
+				if($newpassword != $newpasswordConfirm) {
+					$isValid = false;
+					$error['newpasswordConfirm'] = 'Les mots de passe ne correspondent pas !';
+				}
+
+				if ($isValid) {
+					// - Mise à jour en BDD
+					$userManager->update([
+						// on hache le token en base de données : Sécurity !
+						'token' => '',
+						'password' => password_hash($newpassword,PASSWORD_DEFAULT) 
+						], $user['id']);
+
+					// - on connecte l'utilisateur 
+					$authentificationManager = new \W\Security\AuthentificationManager;
+					$authentificationManager->logUserIn($user);
+					
+					// - redirection vers la page du compte utilisateur 	
+					$this->show('user/detail_account',['user'=>$user]);	
+				}
+			} 
+				
+			if (password_verify($token, $user['token'])) {
+				$this->show('user/newpassword');	
+			}
+		}
+		$this->showForbidden();
 	}
 
 
 	public function detailAccount($username) 
 	{
 		
-		// 1 - on crée l'instance 
+		//  on crée l'instance UserManager 
 		$userManager = new \Manager\UserManager();
 
+		// on crée une instance security manager
+		$authentificationManager = new \W\Security\AuthentificationManager;
+
+		// - on récupère l'utilisateur connecté
+		$userConnect = $authentificationManager -> getLoggedUser() ;
+
+		// Contrôle si l'utilisateur connecté n'est pas l'utilisateur du compte demandé
+		// renvoi pas interdit
+		if ( $userConnect['username'] != $username) {
+			$this->showForbidden();	
+		}
+
 		// 2 - on récupère les données du user
-		$user = $userManager->find($_SESSION['user']['id']);
-		// 3 - on affiche la page
-		$this->show('user/detail_account', ['user'=>$user]);
+		$user = $userManager->getUserByUsernameOrEmail($username);
+		// 3 - on affiche la page si user trouvé 
+		if ($user) {
+			$this->show('user/detail_account', ['user'=>$user]);	
+		} else {
+			// sinon page interdite	
+			$this->showForbidden();	
+		}
+		
 
 	}
 }
