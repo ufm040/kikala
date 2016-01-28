@@ -7,7 +7,7 @@
 		<fieldset>
 			<div class="row">
 				<div class="col-sm-12 col-xs-12">	
-					<label for="username">Pseudo</label>	
+					<label for="username">Pseudo</label>
 					<input type="text" placeholder="Pseudo" name="username"  value="<?= (!empty($_POST['username'])) ? $_POST['username'] : '' ;?>"/>
 					<p class="error"><?= (!empty($error['username'])) ? $error['username'] : '' ;?></p>
 				</div>
@@ -50,16 +50,16 @@
 
 				<div class="col-sm-12 col-xs-12">
 					<div class="radio-inline">
-					  <label for="sex">
-					    <input type="radio" checked="checked" name="sex" id="sex" value="female">
-					    Femme
-					  </label>
+						<input type="radio" checked="checked" name="sex" id="sexFemale" value="sex">
+						<label for="sexFemale">		   
+							Je suis une femme
+						</label>
 					</div>
 					<div class="radio-inline">
-					  <label>
-					    <input type="radio" name="sex" id="sex" value="male">
-					    Homme
-					  </label>
+						<input type="radio" name="sex" id="sexMale" value="sex">
+						<label for="sexMale">		    
+							Je suis un homme
+						</label>
 					</div>
 				</div>
 
@@ -72,11 +72,13 @@
 				<div class="col-sm-12 col-xs-12">		
 					<label for="instructorDescription">Description en tant que formateur</label>
 					<textarea id ="description" type="text" placeholder="Description en tant que formateur ..." name="instructorDescription"><?= (!empty($_POST['instructorDescription'])) ? $_POST['instructorDescription'] : '' ;?></textarea>
+					<p class="error"><?= (!empty($error['instructorDescription'])) ? $error['instructorDescription'] : '' ;?></p>
 				</div>
 
 				<div class="col-sm-12 col-xs-12">		
 					<label for="studentDescription">Description en tant qu'étudiant</label>
 					<textarea id ="description" type="text" placeholder="Description en tant qu'étudiant ..." name="studentDescription"><?= (!empty($_POST['studentDescription'])) ? $_POST['studentDescription'] : '' ;?></textarea>
+					<p class="error"><?= (!empty($error['studentDescription'])) ? $error['studentDescription'] : '' ;?></p>
 				</div>
 
 				<div class="col-sm-12 col-xs-12">		

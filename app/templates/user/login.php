@@ -16,11 +16,13 @@
 					<input type="password" placeholder="Mot de passe" name="password" />
 				</div>
 				
-				<div class="checkbox-inline">
-					<label>
-						<input type ="checkbox" value="stayLogin" />
-						Rester connecté ?
-					</label>
+				<div class="col-sm-12 col-xs-12">
+					<div class="checkbox-inline">
+						<input type ="checkbox" name="login" id="stayLogin" value="stay" />
+						<label for="satyLogin">
+							Rester connecté ?
+						</label>
+					</div>
 				</div>
 
 				<div class="col-sm-12 col-xs-12">

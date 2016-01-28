@@ -31,4 +31,12 @@ class DefaultController extends Controller
 		$this->show('default/legals');
 	}
 
+	/**
+	 * Page réussite inscription
+	 */
+	public function succeedregister()
+	{
+		$this->show('default/succeedregister');
+	}
+
 }

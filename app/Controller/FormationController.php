@@ -64,11 +64,11 @@ class FormationController extends Controller
 			// Contrôle des champs obligatoires sur la formation
 			$validator = new \Utils\FormValidator();
 
-			$validator->validateNotEmpty($title,"title","Saisissez un titre !");	 
-			$validator->validateNotEmpty($description,"description","Saisissez une description !");	 
-			$validator->validateNotEmpty($dateform,"dateform","Saisissez une date !");	 
-			$validator->validateNotEmpty($duration,"duration","Saisissez une durée !");	 
-			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisissez un nombre de place !");
+			$validator->validateNotEmpty($title,"title","Saisir un titre !");	 
+			$validator->validateNotEmpty($description,"description","Saisir une description !");	 
+			$validator->validateNotEmpty($dateform,"dateform","Saisir une date !");	 
+			$validator->validateNotEmpty($duration,"duration","Saisir une durée !");	 
+			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisir un nombre de place !");
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();

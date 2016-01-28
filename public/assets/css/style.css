@@ -175,6 +175,25 @@ p {
 	font-size: 20px;	
 }
 
+/***************************************/
+/* Succeed Register Page + Logout Page */
+/***************************************/
+#succeedregister a, #logout a {
+	color: black;
+	margin-bottom: 20px;
+	text-decoration: underline;
+	font-size: 15px;
+	margin-left: 60px;
+}
+
+#succeedregister a:hover, #logout a:hover {
+	color: #BFB3CC;
+}
+
+#succeedregister, #logout {
+	margin-bottom: 30px;
+}
+
 
 /**********************/
 /*   Footer           */
@@ -192,7 +211,6 @@ footer {
 #footermenu li {
 	padding: 10px 0;
 }
-
 
 #footermenu a {
 	padding: 0 15px;	
@@ -221,6 +239,16 @@ footer {
 	#homepage h2 {
 	font-size: 4em;
 	}
+
+	/* Succeed Register Page + Logout Page */
+	#succeedregister a, #logout a {
+		margin-left: 215px;
+	}
+
+	/* FOOTER */
+	#footermenu ul {
+		padding-left: 80px;
+	}
 }
 
 /* Desktop Responsive */
@@ -239,5 +267,15 @@ footer {
 
 	#headconnect a {	
 		font-size: 1.2em;
+	}
+
+	/* Succeed Register Page */
+	#succeedregister a, #logout a {
+		margin-left: 400px;
+	}
+
+	/* FOOTER */
+	#footermenu ul {
+		padding-left: 280px;
 	}
 } 

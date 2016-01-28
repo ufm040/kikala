@@ -5,12 +5,32 @@
 
 /* Mobile Responsive */
 label {
-	font-size: 17px;
+	font-size: 20px;
 }
 
+/* message d'erreur */
+#registerform p, #formationform p {
+	font-size: 17px;
+	color: red;
+}
+
+#registerform p {
+	margin-left: 50px;
+	margin-bottom: 15px;
+}
+
+#formationform label:nth-child(3) {
+	margin-top: 15px;
+}
+
+#formationform label {
+	font-size: 18px;
+}
+
+/* tous les input / textarea des formulaires */
 #formationform input, #formationform textarea, #registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
 	display: block;
-	margin: 10px auto;
+	margin: 10px auto 0px;
 	width: 80%;
 	padding: 5px 0 5px 3px;
 }
@@ -35,29 +55,57 @@ label {
 	margin-bottom: 30px;
 }
 
-/* page inscription*/
+/* page inscription + page connexion boutton radio/checkbox */
+#registerform .radio-inline, #loginform .checkbox-inline {
+	padding: 0px;
+	margin: 10px 0 15px 30px;
+}
+
+	/* message d'erreur pour le bouton radio/checkbox
+		#registerform .radio-inline p {
+			margin-left: 20px;
+		}*/
+
+#registerform .radio-inline input, #loginform .checkbox-inline input {
+	width: 0%;
+}
+
+#registerform .radio-inline label, #loginform .checkbox-inline label {
+	margin: 0px;
+	padding: 4px 0 0 25px;
+}
 
 /* page connexion */
 #loginform a {
-	color: #E25B34;
+	color: black;
 	margin-bottom: 20px;
+	text-decoration: underline;
 }
 
 #loginform a:hover {
-	color: #F0F2F6;
+	color: #BFB3CC;
 }
 
-
-/* Mini Tablet Responsive */
-@media (min-width: 450px) {
-	/* page connexion */
-	#loginform div:nth-child(4) {
-		padding-left: ;
+#loginform a:nth-child(2) {
+		margin-left: 50px;
 	}
-}
 
 /* Tablet Responsive */
 @media (min-width: 550px) {
+	/* message d'erreur */
+	#registerform p {
+		margin-left: 175px;
+	}
+		/* message d'erreur pour le bouton radio/checkbox
+		#registerform .radio-inline p {
+			margin-left: 65px;
+		}*/
+
+	/* page inscription + page connexion boutton radio/checkbox */
+	#registerform .radio-inline, #loginform .checkbox-inline {
+		margin-left: 110px;
+	}
+
 	/* page inscription + page connexion */
 	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
 		width: 60%;
@@ -65,26 +113,35 @@ label {
 
 	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
 		margin-left: 110px;
-	}
-
-	/* page connexion */
-	#loginform div:nth-child(4) {
-		padding-left: ;
-	}
+	}	
 }
 
 /* Desktop Responsive */
 @media (min-width: 890px) {
+	/* message d'erreur */
+	#registerform p {
+		margin-left: 250px;
+	}
+
+	/* page inscription + page connexion boutton radio/checkbox */
+	#registerform .radio-inline, #loginform .checkbox-inline {
+		margin-left: 200px;
+	}
+
+	#registerform .radio-inline:nth-child(2) {
+		margin-left: 100px;
+	}
+
+		/* message d'erreur pour le bouton radio/checkbox
+		#registerform .radio-inline p {
+			margin-left: 50px;
+		}*/
+	
 	/* page inscription + page connexion */
 	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
 		width: 55%;
 	}
 	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
 		margin-left: 200px;
-	}
-	
-	/* page connexion */
-	#loginform div:nth-child(4) {
-		padding-left: ;
 	}
 }

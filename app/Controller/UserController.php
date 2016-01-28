@@ -34,14 +34,17 @@ class UserController extends Controller
 			// Contrôle des champs obligatoires sur la formation
 			$validator = new \Utils\FormValidator();
 
-			$validator->validateNotEmpty($username,"username","Le Pseudo est obligatoires !");	 
-			$validator->validateNotEmpty($email,"email","L'email est obligatoires !");	 
-			$validator->validateNotEmpty($password,"password","Choississez un mot de passe");	
-			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Resaisir le mot de passe");	
-			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
-			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
-			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
-			$validator->validateNotEmpty($job,"job","Saisir votre Métier");	
+			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");	 
+			$validator->validateNotEmpty($email,"email","L'email est obligatoire !");	 
+			$validator->validateNotEmpty($password,"password","Choisir un mot de passe !");	
+			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe !");	
+			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom !");	
+			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom !");	
+			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance !");
+			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");	
+			$validator->validateNotEmpty($job,"job","Saisir votre métier !");
+			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
+			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();
@@ -103,7 +106,7 @@ class UserController extends Controller
 					"dateCreated" => date("Y-m-d H:i:s")
 				]);
 				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
-				$this->redirectToRoute("home");
+				$this->redirectToRoute("succeedregister");
 			} 
 		}
 		$this->show('user/register',['error' => $error]);

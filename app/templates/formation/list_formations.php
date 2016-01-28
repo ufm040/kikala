@@ -10,7 +10,7 @@
 				<tr>
 					<td>Titre</td>
 					<td>Date</td>
-					<td>Crée le</td>
+					<td>Créé le</td>
 					<td>Lieu</td>
 					<td>Durée</td>
 					<td></td>
