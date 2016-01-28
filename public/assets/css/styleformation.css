@@ -72,7 +72,7 @@ label {
 
 #registerform .radio-inline label, #loginform .checkbox-inline label {
 	margin: 0px;
-	padding: 4px 0 0 25px;
+	padding-left: 25px;
 }
 
 /* page connexion */
