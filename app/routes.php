@@ -13,7 +13,7 @@
 		['GET|POST', '/compte/deconnexion/', 'User#logout', 'logout'],
 		['GET|POST', '/compte/mot-de-passe-oublie/', 'User#forgetpassword', 'forgetpassword'],
 		['GET|POST', '/compte/newpassword/[:token]/[:username]/', 'User#newpassword', 'newpassword'],
-		['GET', '/compte/account/[:username]/', 'User#detailAccount', 'detail_account'],
+		['GET', '/compte/profil/[:username]/', 'User#detailAccount', 'detail_account'],
 
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
