@@ -11,7 +11,7 @@
 		['GET|POST', '/compte/connexion/', 'User#login', 'login'],
 		['GET|POST', '/compte/deconnexion/', 'User#logout', 'logout'],
 		['GET|POST', '/compte/mot-de-passe-oublie/', 'User#forgetpassword', 'forgetpassword'],
-		['GET|POST', '/compte/nouveau-mot-de-passe/', 'User#newpassword', 'newpassword'],
+		['GET|POST', '/compte/newpassword/[:token]/[:username]/', 'User#newpassword', 'newpassword'],
 		['GET', '/compte/account/[:username]/', 'User#detailAccount', 'detail_account'],
 
 		// formation
@@ -19,4 +19,5 @@
 		['GET', '/formation/liste/', 'Formation#listFormations', 'list_formations'],
 
 		['GET', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
+
 	);

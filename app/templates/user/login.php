@@ -14,8 +14,9 @@
 				<div class="col-sm-12 col-xs-12">
 					<label for="password">Mot de passe</label>
 					<input type="password" placeholder="Mot de passe" name="password" />
+					<p class="error"><?= (!empty($error)) ? $error : '' ;?></p>
 				</div>
-				
+
 				<div class="checkbox-inline">
 					<label>
 						<input type ="checkbox" value="stayLogin" name="stayLogin"/>

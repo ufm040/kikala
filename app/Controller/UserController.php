@@ -37,7 +37,7 @@ class UserController extends Controller
 			$validator->validateNotEmpty($username,"username","Le Pseudo est obligatoires !");	 
 			$validator->validateNotEmpty($email,"email","L'email est obligatoires !");	 
 			$validator->validateNotEmpty($password,"password","Choississez un mot de passe");	
-			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Resaisir le mot de passe");	
+			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe");	
 			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
 			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
 			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
@@ -79,6 +79,8 @@ class UserController extends Controller
 					$error['image'] = 'img/users/' . $file->getFileName();
 					$_SESSION['image_user'] = $file->getFileName();
 				}						
+			} else {
+				$_SESSION['image_user'] = 'defaultImageUser.png';
 			}
 
 
@@ -87,7 +89,7 @@ class UserController extends Controller
 			if	($isValid) {
 				// on insère en base de données
 				// 2 - on appelle la méthode insert
-				$userManager->insert([
+				$user = $userManager->insert([
 					"username" => $username,
 					"email" => $email ,
 					"password" => password_hash($password,PASSWORD_DEFAULT),
@@ -102,6 +104,18 @@ class UserController extends Controller
 					"image" => $_SESSION['image_user'],
 					"dateCreated" => date("Y-m-d H:i:s")
 				]);
+
+				// on connecte l'utilisateur 
+				if ($user) {
+					$userId = $userManager->lastInsertUser();
+
+					$userConnect = $userManager->find($userId['id']);
+						
+					$userSecurity = new \W\Security\AuthentificationManager();
+					// Connecte l'utiliasteur 
+					$userSecurity ->logUserIn($userConnect);
+
+				}
 				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
 				$this->redirectToRoute("home");
 			} 
@@ -115,22 +129,24 @@ class UserController extends Controller
 
 	public function login()
 	{
+		var_dump($_POST);
+		$errorconnect = '';
 		// vérification de la combinaison d'email et mdp présents en bdd
 		if(!empty($_POST)){
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
-			if ($_POST['stayLogin']) {
-				$stayLogin = true;
+			if (isset($_POST['stayLogin'])) {
+				$stayLogin = $_POST['stayLogin'];
 			} else {
 				$stayLogin = false;	
 			}
 
 			$authentificationManager = new \W\Security\AuthentificationManager;
 			$result = $authentificationManager->isValidLoginInfo($email, $password);
-			
+
 			// si identifiants OK
-			if($result){
+			if($result > 0){
 				// on récupère l'email en base de donnée
 				$userManager = new \Manager\UserManager();	
 				$user = $userManager->find($result);
@@ -141,21 +157,31 @@ class UserController extends Controller
 				// on crée un cookies si l'utilisateur veut rester connecté
 
 				if($stayLogin) {
-					$value = $user['id'];
-					setcookie("KikalaCookie", $value, time()+3660);
-				}
-			}
 
-			// on redirige ensuite l'utilisateur vers la page "Mon compte : accueil"
-			$this->redirectToRoute("home");
+					// création d'un token pour le cookie 
+					$token = \W\Security\StringUtils::randomString(32);
+					// hask du tocken et json_encode du value du cookies
+					$tokenHash = password_hash($token,PASSWORD_DEFAULT);
+					$value = json_encode(["id"=>$user['id'] , "token" =>$tokenHash]) ;
+					setcookie("kikala_remember_me", $value, time()+3660,'/');
+
+					// MAJ de la BDD avec le token du cookie
+					$userManager->update([
+						// on hache le token en base de données : Sécurity !
+						'tokenCookie' => $tokenHash 
+						], $user['id']);
+				}
+				$this->redirectToRoute("home");
+
+			} 
+			// mauvais identifiant 
+			else {
+				$errorconnect = "email inconnu ou mot de passe incorrect";	
+			}
 		}
-		// mauvais identifiant
-		else {
 			
-		}			
-		
 		// affiche la page
-		$this->show('user/login');
+		$this->show('user/login',['error'=>$errorconnect]);
 	}
 
 
@@ -166,7 +192,7 @@ class UserController extends Controller
 	public function logout()
 	{
 		$userSecurity = new \W\Security\AuthentificationManager();
-		// Déconnecte l'utiliasteur 
+		// Déconnecte l'utilisateur 
 		$userSecurity ->logUserOut();
 		// affiche la page
 		$this->show('user/logout');
@@ -178,28 +204,43 @@ class UserController extends Controller
 
 	public function forgetpassword()
 	{
-		/*$email = $_POST['email'];
+		
+		if ($_POST) {
+			$email = $_POST['email'];
 
-		// vérifie qu'il existe
-		$userManager = new \Manager\UserManager();
-		$user = $userManager->getUserByUsernameOrEmail($email);
+			// vérifie qu'il existe
+			$userManager = new \Manager\UserManager();
+			$user = $userManager->getUserByUsernameOrEmail($email);
 
-		if($user){
+			if($user){
 
-			// phpMailer
-			$token = \W\Security\StringUtils::randomString(32);
+				// phpMailer
+				$token = \W\Security\StringUtils::randomString(32);
 
-			$userManager->update([
-				'token' => $token,
-				'dateModified'=> date("Y-m-d H:i:s")
-				], $user['id']);
-			$resetLink = $this->generateUrl('newpassword', [
-				'token' => $token,
-				'email' => $email
-				], true);
+				$userManager->update([
+					// on hache le token en base de données : Sécurity !
+					'token' => password_hash($token,PASSWORD_DEFAULT)
+					], $user['id']);
+				$resetLink = $this->generateUrl('newpassword', [
+					'token' => $token,
+					'username' => $user['username']
+					], true);
 
-			// envoie du resetLink
-		}*/
+				// envoie du resetLink par mail : appel de la classe SendMail()
+				$mail = new \Utils\EmailSender($user['email']);
+				$mail->setSubject('reset password');
+				$mail->setContentMessage($resetLink);
+				$mail->sendEmail();
+
+				if ( ! $mail->getIsSend()) {
+					var_dump('PROBLEME Envoie Mail');
+				} else {
+					var_dump($resetLink) ;
+				}
+				die();
+			}			
+		}
+
 
 		$this->show('user/forgetpassword');
 	}
@@ -208,15 +249,56 @@ class UserController extends Controller
 	 * Page du nouveau mot de passe
 	 */
 
-	public function newpassword($token, $email)
+	public function newpassword($token, $username)
 	{
-		/* 
+		$error = array() ;
+
 		$userManager = new \Manager\UserManager();
-		$user = $userManager->getUserByUsernameOrEmail($email);
-		if($user['token'] == $token){
-			// affiche le formulaire */
-			$this->show('user/newpassword');
-		
+		$user = $userManager->getUserByUsernameOrEmail($username);		
+		if ($user) {
+			if ($_POST) {
+				$isValid = true;
+				$newpassword = $_POST['newpassword'];
+				$newpasswordConfirm = $_POST['newpasswordConfirm'];
+
+				$validator = new \Utils\FormValidator();
+		 
+				$validator->validateNotEmpty($newpassword,"newpassword","Saisir un mot de passe");	
+				$validator->validateNotEmpty($newpasswordConfirm,"newpasswordConfirm","Ressaisir le mot de passe");	
+
+				if ( !$validator->isValid()) {
+					$error = $validator ->getErrors();
+					$isValid = false;		
+				}
+
+				// erreur sur le mdp
+				if($newpassword != $newpasswordConfirm) {
+					$isValid = false;
+					$error['newpasswordConfirm'] = 'Les mots de passe ne correspondent pas !';
+				}
+
+				if ($isValid) {
+					// - Mise à jour en BDD
+					$userManager->update([
+						// on hache le token en base de données : Sécurity !
+						'token' => '',
+						'password' => password_hash($newpassword,PASSWORD_DEFAULT) 
+						], $user['id']);
+
+					// - on connecte l'utilisateur 
+					$authentificationManager = new \W\Security\AuthentificationManager;
+					$authentificationManager->logUserIn($user);
+					
+					// - redirection vers la page du compte utilisateur 	
+					$this->show('user/detail_account',['user'=>$user]);	
+				}
+			} 
+				
+			if (password_verify($token, $user['token'])) {
+				$this->show('user/newpassword');	
+			}
+		}
+		$this->showForbidden();
 	}
 
 
