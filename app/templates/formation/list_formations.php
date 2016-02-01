@@ -1,3 +1,4 @@
+
 <?php $this->layout('layout', ['title' => 'Liste des formations']) ?>
 
 <?php $this->start('main_content') ?>

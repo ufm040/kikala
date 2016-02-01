@@ -5,9 +5,11 @@
 	<h2>Détail de la formation <?php echo $formation['title']?></h2>
 
 
-	<p><?= $formation['description']?> </p>
+	<p><?= $this->e($formation['description'])?> </p>
 	<img src="<?= $this->assetUrl('img/formations/src/'.$formation['image']) ?>">
-	<p></p>
+	<p>Nombre de places restante : <?= $nbrPlace ?></p>
+
+	<p>Formation donnée par <a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username']])?>"><?= $kikologue['username'] ?></a> </p>
 
 	<?php if ($kikos) :?>
 		<form action="<?= $this->url('inscription_formation')?>" method="POST" id="inscription-form">

@@ -27,4 +27,35 @@ class FormationManager extends \W\Manager\Manager
 		$sth->execute();
 		return $sth->fetch();	
 	}
+
+
+	// Fonction liste de toutes les formations à venir 
+
+	public function listFormations() {
+		$sql = "SELECT * FROM " . $this->table;
+		$sql .= " WHERE dateFormation >= now() ";
+		$sql .= "ORDER BY dateFormation ASC  LIMIT 30 ;" ;
+
+		$sth = $this->dbh->prepare($sql);
+
+		$sth->execute();
+		return $sth->fetchAll();	
+	}
+
+	// Fonction liste des formations d'un user 
+
+	public function listFormationsByUser($userId) {
+
+
+		// recherche des utilisateur 
+		$sql = "SELECT * FROM " . $this->table;
+		$sql .= " WHERE userId = :userId ";
+		$sql .= "ORDER BY dateFormation ASC LIMIT 5 ;" ;
+
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":userId", $userId);
+
+		$sth->execute();
+		return $sth->fetchAll();		
+	}
 }

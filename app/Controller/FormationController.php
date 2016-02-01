@@ -37,13 +37,23 @@ class FormationController extends Controller
 					$kikos = false ;
 				}	
 			}
+
+			$nbrInscrit = $inscription->countInscription($id);
 		}
+
+		// récupération des données du formateur
+
+		$kikoUser = new \Manager\UserManager();
+
+		$kikologue = $kikoUser->find($formation['userId']);
 
 
 		$this->show('formation/detail_formation',[
 			"formation" => $formation,
 			"register" =>$register,
-			"kikos" => $kikos  
+			"kikos" => $kikos,
+			"nbrPlace" => $formation['totalNumberPlace'] - $nbrInscrit,
+			"kikologue" => $kikologue
 		]);		
 
 	}	
@@ -53,17 +63,28 @@ class FormationController extends Controller
 	 */	
 
 
-	public function listFormations(){
+	public function listFormations($userName,$toShow = false){
 
 		$formationManager = new \Manager\FormationManager();
+		if ($userName == 'all') {
+			$formations = $formationManager->listFormations();
+			
+		} else {
+			$userId = $this->getUser()['id'];
+			$formations = $formationManager->listFormationsByUser($userId);	
+		}
 
-		$formations = $formationManager->findAll();
-
-		$this->show('formation/list_formations',[
-			"formations" => $formations
-		]);		
+		if ( !$toShow) {
+			$this->show('formation/list_formations',[
+				"formations" => $formations
+			]);				
+		} else {
+			return $formations ;
+		}
+	
 
 	}
+	
 
 	/**
 	 * Page Inscription d'une formation
