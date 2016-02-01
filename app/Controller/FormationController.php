@@ -19,8 +19,31 @@ class FormationController extends Controller
 
 		$formation = $formationManager->find($id);
 
+		// $register : permet de contrôler si l'utilisateur peut s'inscrire à la formation
+		// $kikos : permet de contrôler si l'utilisateur a suffisemment de kikos pour s'inscrire
+		$kikos = false; 
+		$authentificationManager = new \W\Security\AuthentificationManager;
+	
+		if ($authentificationManager->getLoggedUser()) {
+			$loggedUser = $this->getUser();
+			// utilisateur est-il déjà inscrit à la formation ?
+			$inscription = new \Manager\InscriptionsManager();	
+
+			$register = $inscription->checkInscription($id, $loggedUser['id']);
+			$kikos = true;
+			// contrôle si assez de kikos pour s'inscrire à une formation
+			if ( ! $register) {
+				if ($loggedUser['credit'] ==  0) {
+					$kikos = false ;
+				}	
+			}
+		}
+
+
 		$this->show('formation/detail_formation',[
-			"formation" => $formation
+			"formation" => $formation,
+			"register" =>$register,
+			"kikos" => $kikos  
 		]);		
 
 	}	
@@ -140,5 +163,5 @@ class FormationController extends Controller
 		}
 		$this->show('formation/formationregister' ,  ['error' => $error]);
 	}
-
+	
 }
