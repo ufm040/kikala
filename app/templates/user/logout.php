@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-<h2>Déconnexion</h2>
+<h2>Vous avez bien été deconnecté !</h2>
 
 <div id="logout">
 	<div class="row">

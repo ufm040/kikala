@@ -13,55 +13,67 @@
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/styleformation.css') ?>">
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid push">
 		<header>
-		<div class="row">
-			<div class="col-sm-4 col-xs-12">
-				<h1><a href="<?= $this->url('home')?>" title="Accueil">Kikala !</a></h1>
+			<div class="row">
+				<div class="col-sm-4 col-xs-12">
+					<h1><a href="<?= $this->url('home')?>" title="Accueil">Kikala !</a></h1>
+				</div>	
+				<div class="col-sm-8 col-xs-12">
+					<div id="headconnect">
+						<div class="col-sm-6 col-xs-6 yo">
+							<?php if ($w_user['id']) {?> 
+								<a href="<?= $this->url('logout')?>" title="Inscription"><i class="fa fa-power-off"></i>Déconnexion</a>
+							<?php } else { ?>
+								<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
+							<?php }	?>
+						</div>
+						<div class="col-sm-6 col-xs-6 yo">
+							<?php if ($w_user['id']) {?> 
+							<ul>
+								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
+									<ul>
+										<li><a href="#">Mon profil</a></li>
+										<li><a href="#">Mes formations</a></li>
+										<li><a href="#">Mes inscriptions</a></li>
+										<li><a href="#">J'ai 2 kikos !</a></li>
+									</ul>
+								</li>
+							</ul>
+							<?php } else { ?>
+								<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
+							<?php }	?>
+						</div>
+					</div>			
+				</div>
 			</div>	
-			<div class="col-sm-8 col-xs-12">
-				<div id="headconnect">
-					<div class="col-sm-6 col-xs-6 yo">
-						<?php if ($w_user['id']) {?> 
-							<a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-power-off"></i>Mon Compte</a>
-						<?php } else { ?>
-							<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
-						<?php }	?>
-					</div>
-					<div class="col-sm-6 col-xs-6 yo">
-						<?php if ($w_user['id']) {?> 
-							<a href="<?= $this->url('logout')?>" title="Inscription"><i class="fa fa-user"></i>Déconnexion</a>
-						<?php } else { ?>
-							<a href="<?= $this->url('register')?>" title="Inscription"><i class="fa fa-user"></i>Je m'inscris</a>
-						<?php }	?>
-					</div>
-				</div>			
-			</div>
-		</div>	
 
-		<nav id="headmenu" class="clearfix">
-			<ul>
-				<li><a href="<?= $this->url('list_formations') ?>" title="Formations">Je cherche une formation</a></li>
-				<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
-			</ul>
-		</nav>			
-		</header>
-
-		<section>
-			<?= $this->section('main_content') ?>
-		</section>
-
-		<footer>
-			<nav id="footermenu" class="clearfix">
+			<nav id="headmenu" class="clearfix">
 				<ul>
-					<li><a href="<?php echo $this->url('home')?>" title="Accueil">Accueil</a></li>
-					<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
-					<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
-					<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
+					<li><a href="<?= $this->url('list_formations') ?>" title="Formations">Je cherche une formation</a></li>
+					<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 				</ul>
 			</nav>			
-		</footer>
+			</header>
+
+			<section>
+				<?= $this->section('main_content') ?>
+			</section>
 	</div>
+		
+		<div class="container-fluid">
+			<footer>
+				<nav id="footermenu" class="clearfix">
+					<ul>
+						<li><a href="<?php echo $this->url('home')?>" title="Accueil">Accueil</a></li>
+						<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
+						<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
+						<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
+					</ul>
+				</nav>			
+			</footer>
+		</div>
+	
 
 	<script src="<?= $this->assetUrl('js/jquery-2.1.4.js') ?>"></script>
 

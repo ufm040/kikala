@@ -5,7 +5,6 @@
 
 	<div class="table-responsive">
 		<table class="table table-condensed">
-		<caption>Liste des formations</caption>
 			<thead>
 				<tr>
 					<td>Titre</td>

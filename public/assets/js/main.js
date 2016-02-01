@@ -1,5 +1,5 @@
 	
-// formulaire 
+// FORMULAIRE
 
 function inputImage($files){
 
@@ -39,7 +39,7 @@ function testerror(){
 
 testerror();
 
-//datepicker
+// DATE PICKER 
 $("#dateform").datepicker({
   todayBtn:"true",
   format:"dd/mm/yyyy", 
@@ -58,4 +58,10 @@ $('#duration').timepicker({
 });
 
 
+// MENU DEROULANT lorsque l'on est connecté
+$("#headconnect ul ul").hide();
 
+//avec hover
+$("#headconnect ul li").hover( function(){ 
+  $(this).find("ul").stop(true).slideToggle(); 
+} );

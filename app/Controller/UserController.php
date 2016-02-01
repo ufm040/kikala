@@ -41,11 +41,10 @@ class UserController extends Controller
 			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
 			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
 			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
+			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
 			$validator->validateNotEmpty($job,"job","Saisir votre métier");	
 			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
-			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
-			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
-			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");
+			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");
 			
 			$validator->validateEmail($email,"email","L'email est incorrect !");
 			$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
@@ -131,7 +130,7 @@ class UserController extends Controller
 
 				}
 				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
-				$this->redirectToRoute("home");
+				$this->redirectToRoute("succeedregister");
 			} 
 		}
 		$this->show('user/register',['error' => $error]);
@@ -143,7 +142,6 @@ class UserController extends Controller
 
 	public function login()
 	{
-		var_dump($_POST);
 		$errorconnect = '';
 		// vérification de la combinaison d'email et mdp présents en bdd
 		if(!empty($_POST)){

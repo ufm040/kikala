@@ -20,7 +20,7 @@
 				<div class="col-sm-12 col-xs-12">
 					<div class="checkbox-inline">
 						<input type ="checkbox" name="login" id="stayLogin" value="stay" />
-						<label for="satyLogin">
+						<label for="stayLogin">
 							Rester connecté ?
 						</label>
 					</div>
