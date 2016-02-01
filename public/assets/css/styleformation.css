@@ -87,11 +87,22 @@ label {
 }
 
 #loginform a:nth-child(2) {
-		margin-left: 50px;
+	margin-left: 50px;
 }
 
 /* Liste des formations en vignette */
+.table-responsive table {
+	font-size: 17px;
+}
 
+.table-responsive tr {
+	float: left;
+	margin: 0 50px 30px;
+}
+
+.table-responsive td {
+	display: table;
+}
 
 
 
@@ -118,7 +129,7 @@ label {
 
 	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
 		margin-left: 110px;
-	}	
+	}
 }
 
 /* Desktop Responsive */
@@ -148,5 +159,10 @@ label {
 	}
 	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
 		margin-left: 200px;
+	}
+
+	/* Liste des formations en vignette */
+	.table-responsive tr {
+		margin: 0px 13px 30px;
 	}
 }

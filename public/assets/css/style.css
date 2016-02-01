@@ -212,7 +212,7 @@ p {
 /***************************************/
 /* Succeed Register Page + Logout Page */
 /***************************************/
-#succeedregister a, #logout a {
+#succeedregister a, #logout a, table a {
 	color: black;
 	margin-bottom: 20px;
 	text-decoration: underline;
@@ -220,7 +220,7 @@ p {
 	margin-left: 60px;
 }
 
-#succeedregister a:hover, #logout a:hover {
+#succeedregister a:hover, #logout a:hover, .table-responsive table a:hover {
 	color: #BFB3CC;
 }
 
@@ -228,6 +228,9 @@ p {
 	margin-bottom: 30px;
 }
 
+.table-responsive table a {
+	margin: 0px;
+}
 
 /**********************/
 /*   Footer           */
