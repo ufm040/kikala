@@ -8,7 +8,6 @@ class InscriptionsManager extends \W\Manager\Manager
 
 	public function checkInscription($formationId, $userId) {
  
-
 		if (!is_numeric($formationId)){
 			return false;
 		}

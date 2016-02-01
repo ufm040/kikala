@@ -12,12 +12,12 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					Choisissez parmi les 15 formations proposées
+					Choisissez parmi les <?= $nbrFormation ?> formations proposées
 				</div>
 			</div>		
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					32 kikologues inscrits
+					<?= $nbrKikologue ?> kikologues inscrits
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-12">

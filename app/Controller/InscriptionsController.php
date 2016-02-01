@@ -26,19 +26,30 @@ class InscriptionsController extends Controller
 			$loggedUser = $this->getUser();
 
 			$newinscription = new \Manager\InscriptionsManager();
+			$newuser = new \Manager\UserManager(); 
 			if ( $_POST['register'] == 1 ) {
 				
 				// inscription
-				$newinscription->insert([					
+				$insert = $newinscription->insert([					
 					'userId'=>$loggedUser['id'],
 					'formationId'=> $_POST['formation-id']
 				]) ;
-				$message = 'Vous êtes bien inscrit !';					
+				// 
+				if ($insert) {
+					// Inscription : supprimer un kiko à l'user  
+					$newuser->manageKikos($loggedUser['id'],'del');	
+					$message = 'Vous êtes bien inscrit !';	
+				}								
 			} else {
 				// Annulation d'une inscription				
-				$newinscription->cancelInscription($_POST['formation-id'] ,$loggedUser['id'] );
-				$message = 'Votre annulation a bien été pris en compte !';				
+				$del = $newinscription->cancelInscription($_POST['formation-id'] ,$loggedUser['id'] );
+				if ($del) {
+					// Désinscription : on ajoute un kiko à l'user  
+					$newuser->manageKikos($loggedUser['id'],'add');	
+					$message = 'Votre annulation a bien été pris en compte !';		
+				}			
 			}
+			//$authentificationManager->refreshUser();
 		}	
 
 		$messagesJson = json_encode($message);
