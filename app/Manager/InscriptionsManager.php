@@ -46,4 +46,14 @@ class InscriptionsManager extends \W\Manager\Manager
 
 	}
 
+	public function countInscription($formationId)
+	{
+		$sql = "SELECT count(*) as nbrInscrit FROM ". $this->table . " WHERE formationId = :formationId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":formationId", $formationId);
+
+		$sth->execute();
+		return $sth->fetch()['nbrInscrit'];	
+	}
+
 }

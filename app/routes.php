@@ -15,9 +15,12 @@
 		['GET|POST', '/compte/newpassword/[:token]/[:username]/', 'User#newpassword', 'newpassword'],
 		['GET', '/compte/profil/[:username]/', 'User#detailAccount', 'detail_account'],
 
+		// kikologue
+		['GET', '/kikologue/[:username]/', 'User#detailAccount', 'detail_kikologue'],
+
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
-		['GET', '/formation/liste/', 'Formation#listFormations', 'list_formations'],
+		['GET', '/formation/liste/[:username]/', 'Formation#listFormations', 'list_formations'],
 		['GET|POST', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
 
 

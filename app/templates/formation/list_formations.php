@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Formations	']) ?>
+<?php $this->layout('layout', ['title' => 'Formations']) ?>
 
 <?php $this->start('main_content') ?>
 	<h2>Liste des Formations</h2>

@@ -33,10 +33,14 @@
 							<ul>
 								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
 									<ul>
-										<li><a href="#">Mon profil</a></li>
-										<li><a href="#">Mes formations</a></li>
+										<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>">Mon profil</a></li>
+										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>">Mes formations</a></li>
 										<li><a href="#">Mes inscriptions</a></li>
-										<li><a href="#">J'ai 2 kikos !</a></li>
+										<?php if ($w_user['credit']>0) : ?>
+											<li>J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>
+										<?php else : ?>	
+											<li>Je n'ai plus de kikos ... <i class="fa fa-frown-o"></i></li>	
+										<?php endif ?>	
 									</ul>
 								</li>
 							</ul>
@@ -50,7 +54,7 @@
 
 			<nav id="headmenu" class="clearfix">
 				<ul>
-					<li><a href="<?= $this->url('list_formations') ?>" title="Formations">Je cherche une formation</a></li>
+					<li><a href="<?= $this->url('list_formations',['username'=>'all']) ?>" title="Formations">Je cherche une formation</a></li>
 					<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 				</ul>
 			</nav>			

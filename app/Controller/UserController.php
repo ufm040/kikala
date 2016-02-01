@@ -342,17 +342,23 @@ class UserController extends Controller
 		// - on récupère l'utilisateur connecté
 		$userConnect = $authentificationManager -> getLoggedUser() ;
 
-		// Contrôle si l'utilisateur connecté n'est pas l'utilisateur du compte demandé
-		// renvoi pas interdit
-		if ( $userConnect['username'] != $username) {
-			$this->showForbidden();	
-		}
 
 		// 2 - on récupère les données du user
 		$user = $userManager->getUserByUsernameOrEmail($username);
 		// 3 - on affiche la page si user trouvé 
 		if ($user) {
-			$this->show('user/detail_account', ['user'=>$user]);	
+
+			// Contrôle si l'utilisateur connecté n'est pas l'utilisateur du compte demandé
+			// renvoi pas interdit
+			if ( $userConnect['username'] != $username) {
+				$newform  = new \Controller\FormationController();
+				$formations = $newform -> listFormations($user['username'],true); 
+				$this->show('user/detail_kikologue', ['kikologue'=>$user , 'formations'=>$formations]);
+			} else  {
+				$this->show('user/detail_account', ['user'=>$user]);				
+			}
+
+				
 		} else {
 			// sinon page interdite	
 			$this->showForbidden();	
