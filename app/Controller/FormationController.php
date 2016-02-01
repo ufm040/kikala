@@ -19,8 +19,31 @@ class FormationController extends Controller
 
 		$formation = $formationManager->find($id);
 
+		// $register : permet de contrôler si l'utilisateur peut s'inscrire à la formation
+		// $kikos : permet de contrôler si l'utilisateur a suffisemment de kikos pour s'inscrire
+		$kikos = false; 
+		$authentificationManager = new \W\Security\AuthentificationManager;
+	
+		if ($authentificationManager->getLoggedUser()) {
+			$loggedUser = $this->getUser();
+			// utilisateur est-il déjà inscrit à la formation ?
+			$inscription = new \Manager\InscriptionsManager();	
+
+			$register = $inscription->checkInscription($id, $loggedUser['id']);
+			$kikos = true;
+			// contrôle si assez de kikos pour s'inscrire à une formation
+			if ( ! $register) {
+				if ($loggedUser['credit'] ==  0) {
+					$kikos = false ;
+				}	
+			}
+		}
+
+
 		$this->show('formation/detail_formation',[
-			"formation" => $formation
+			"formation" => $formation,
+			"register" =>$register,
+			"kikos" => $kikos  
 		]);		
 
 	}	
@@ -48,6 +71,17 @@ class FormationController extends Controller
 	public function formationregister()
 	{
 		$error = array() ;
+
+		// si l'utilisateur n'est pas connecté => on redirige vers la page de connexion 
+		$authentificationManager = new \W\Security\AuthentificationManager;
+
+		if (! $authentificationManager->getLoggedUser()) {
+			$this->show('user/login');	
+		} else {
+			$loggedUser = $this->getUser(); 
+		}
+
+
 		if ($_POST) {
 			$title = $_POST['title'];
 			$description= $_POST['description'];
@@ -64,11 +98,11 @@ class FormationController extends Controller
 			// Contrôle des champs obligatoires sur la formation
 			$validator = new \Utils\FormValidator();
 
-			$validator->validateNotEmpty($title,"title","Saisir un titre !");	 
-			$validator->validateNotEmpty($description,"description","Saisir une description !");	 
-			$validator->validateNotEmpty($dateform,"dateform","Saisir une date !");	 
-			$validator->validateNotEmpty($duration,"duration","Saisir une durée !");	 
-			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisir un nombre de place !");
+			$validator->validateNotEmpty($title,"title","Saisissez un titre !");	 
+			$validator->validateNotEmpty($description,"description","Saisissez une description !");	 
+			$validator->validateNotEmpty($dateform,"dateform","Saisissez une date !");	 
+			$validator->validateNotEmpty($duration,"duration","Saisissez une durée !");	 
+			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisissez un nombre de place !");
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();
@@ -108,7 +142,7 @@ class FormationController extends Controller
 					"title" => $title ,
 					"dateFormation" =>$date->format('Y-m-d H:i:s'),
 					"duration" => $duration,
-					"userId" => 1,
+					"userId" => $loggedUser['id'],
 					"dateCreated" => date("Y-m-d H:i:s"),
 					"description" =>$description,
 					"image" => $file_name,
@@ -129,5 +163,5 @@ class FormationController extends Controller
 		}
 		$this->show('formation/formationregister' ,  ['error' => $error]);
 	}
-
+	
 }

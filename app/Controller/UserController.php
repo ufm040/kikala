@@ -14,6 +14,14 @@ class UserController extends Controller
 	public function register()
 	{
 		$error = array() ;	
+
+		// si l'utilisateur est déjà connecté => redirige vers la page "Mon compte"
+		$authentificationManager = new \W\Security\AuthentificationManager;
+
+		if ($authentificationManager->getLoggedUser()) {
+			$this->show('user/detail_account', ['user'=>$this->getUser()]);	
+		}
+
 		// formulaire soumis ?
 		if($_POST){
 			$username = $_POST['username'];
@@ -44,12 +52,15 @@ class UserController extends Controller
 			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
 			$validator->validateNotEmpty($job,"job","Saisir votre métier");	
 			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
-			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");
-			
-			$validator->validateEmail($email,"email","L'email est incorrect !");
-			$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
-			$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits");
+			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
+			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
+			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");
 
+			if ( $validator->isValid()) {			
+				$validator->validateEmail($email,"email","L'email est incorrect !");
+				$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
+				$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits");
+			}
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();
@@ -129,7 +140,9 @@ class UserController extends Controller
 					$userSecurity ->logUserIn($userConnect);
 
 				}
-				// on redirige l'utilisateur vers la page d'accueil après la validation du formulaire
+
+				// on redirige l'utilisateur vers une page de Bienvenue
+
 				$this->redirectToRoute("succeedregister");
 			} 
 		}
@@ -143,6 +156,7 @@ class UserController extends Controller
 	public function login()
 	{
 		$errorconnect = '';
+
 		// vérification de la combinaison d'email et mdp présents en bdd
 		if(!empty($_POST)){
 			$email = $_POST['email'];
@@ -346,4 +360,5 @@ class UserController extends Controller
 		
 
 	}
+
 }

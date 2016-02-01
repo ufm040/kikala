@@ -1,4 +1,35 @@
 	
+/*******************************/
+/* Inscription à une formation */
+/*******************************/
+
+$("#inscription-form").on("submit", function(e){ 
+    // empêche ma soumission du formulaire
+    e.preventDefault();
+    var $register = $("#register").val();
+    $.ajax({
+        "url": $("#inscription-form").attr("action"),
+        "type": $("#inscription-form").attr("method"),
+        "data":$("#inscription-form").serialize()
+    })
+    .done(function(message){
+        // Affiche le message de confirmation
+        $("#response-inscription").html(message);
+        // modification du libellé du bouton    
+        if ($register == 1) {
+            $("#register").val('0'); 
+            $(".managebutton").text("Annuler Inscription !"); 
+        } else {
+            $("#register").val('1'); 
+            $(".managebutton").text("S'inscrire !");  
+        }
+    })
+    .fail(function(){
+        $("#response-inscription").html("Une erreur est survenue, nous n'avons pas pu traiter votre demande");
+    });  
+});
+
+
 // FORMULAIRE
 
 function inputImage($files){
@@ -18,11 +49,11 @@ function inputImage($files){
 
 
 $('#formationform').find('input[name="image"]').on('change', function (e) {
-  inputImage($(this)[0].files);
+    inputImage($(this)[0].files);
 });
 
 $('#compteform').find('input[name="image"]').on('change', function (e) {
-  inputImage($(this)[0].files);
+    inputImage($(this)[0].files);
 });
 
 function testerror(){
@@ -41,20 +72,20 @@ testerror();
 
 // DATE PICKER 
 $("#dateform").datepicker({
-  todayBtn:"true",
-  format:"dd/mm/yyyy", 
-  autoclose:"true",
-  pickerPosition:"bottom-left",
-  startView:"year",
-  minView:"month",
-  language:'fr'
+    todayBtn:"true",
+    format:"dd/mm/yyyy", 
+    autoclose:"true",
+    pickerPosition:"bottom-left",
+    startView:"year",
+    minView:"month",
+    language:'fr'
 });
 
 
 $('#duration').timepicker({
-  'language':'fr',
-  'showMeridian':false,
-  'defaultTime':'01:00'
+    'language':'fr',
+    'showMeridian':false,
+    'defaultTime':'01:00'
 });
 
 

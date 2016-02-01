@@ -12,7 +12,16 @@ class DefaultController extends Controller
 	 */
 	public function home()
 	{
-		$this->show('default/home');
+
+		$newFormation = new \Manager\FormationManager();
+
+		$countFormation = $newFormation->countFormations();
+
+		$newUser = new \Manager\UserManager();
+
+		$countKikologue = $newUser->countKikologue();
+
+		$this->show('default/home',['nbrFormation'=>$countFormation['nbrFormation'], 'nbrKikologue'=>$countKikologue['nbrKikologue']]);
 	}
 
 	/**

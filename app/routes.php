@@ -18,7 +18,11 @@
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
 		['GET', '/formation/liste/', 'Formation#listFormations', 'list_formations'],
-		['GET', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
+		['GET|POST', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
+
+
+		// inscriptions
+		['GET|POST', '/', 'Inscriptions#manageInscriptions', 'inscription_formation'],
 
 		// user profile
 	);
