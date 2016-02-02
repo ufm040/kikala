@@ -259,11 +259,11 @@ footer {
 	color :#fff;
 }
 
-#footermenu .container-fluid li:hover {
+#footermenu  li:hover {
 	background-color: #ECE7E3;
 }
 
-.container-fluid #footermenu a:hover {
+#footermenu a:hover {
 	color:#6B6B6A;
 }
 
@@ -285,7 +285,7 @@ footer {
 	}
 
 	/* FOOTER */
-	#footermenu ul {
+	.container-fluid #footermenu ul {
 		padding-left: 80px;
 	}
 }
@@ -314,7 +314,7 @@ footer {
 	}
 
 	/* FOOTER */
-	#footermenu ul {
+	.container-fluid #footermenu ul {
 		padding-left: 280px;
 	}
 } 
