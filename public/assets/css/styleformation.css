@@ -9,12 +9,12 @@ label {
 }
 
 /* message d'erreur */
-#registerform p, #formationform p {
+#registerform p, #formationform p, #forgetpasswordform p {
 	font-size: 17px;
 	color: red;
 }
 
-#registerform p {
+#registerform p, #forgetpasswordform p {
 	margin-left: 50px;
 	margin-bottom: 15px;
 }
@@ -75,14 +75,14 @@ label {
 	padding-left: 25px;
 }
 
-/* page connexion */
-#loginform a {
+/* page connexion + page detail forma + page detail mon compte */
+#loginform a, #formationdetail a, #accountdetail a {
 	color: black;
 	margin-bottom: 20px;
 	text-decoration: underline;
 }
 
-#loginform a:hover {
+#loginform a:hover, #formationdetail a:hover, #accountdetail a:hover {
 	color: #BFB3CC;
 }
 
@@ -104,12 +104,43 @@ label {
 	display: table;
 }
 
+/* page détail de la formation + page detail de mon compte */
+#formationdetail .col-xs-6, #accountdetail .col-xs-6 {
+    width: 100%;
+}
+
+#formationdetail .btn{
+	margin: 0 0 30px 70px;
+}
+
+/* page détail du compte*/
+#accountdetail a {
+	font-size: 17px;
+	display: block;
+}
+
+#accountdetail .accountbutton a {
+	display: inline;
+	color: #E25B34;
+}
+
+#accountdetail .accountbutton a:hover {
+	color: black;
+}
+
+.accountbutton {
+	padding: 0 0 20px 51px;
+}
+
+.accountbutton a {
+	padding-right: 15px;
+}
 
 
 /* Tablet Responsive */
 @media (min-width: 550px) {
 	/* message d'erreur */
-	#registerform p {
+	#registerform p, #forgetpasswordform p {
 		margin-left: 175px;
 	}
 		/* message d'erreur pour le bouton radio/checkbox
@@ -130,12 +161,25 @@ label {
 	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
 		margin-left: 110px;
 	}
-}
+
+	/* page détail de la formation + page detail du compte */
+	#formationdetail img {
+		padding: 0 0 50px 15px;
+	}
+
+	#formationdetail .col-xs-6, #accountdetail .col-xs-6 {
+   		width: 50%;
+	}
+
+	#formationdetail .btn {
+		margin: 0;
+		margin-bottom: 30px;
+	}
 
 /* Desktop Responsive */
 @media (min-width: 890px) {
 	/* message d'erreur */
-	#registerform p {
+	#registerform p, #forgetpasswordform p {
 		margin-left: 250px;
 	}
 

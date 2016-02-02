@@ -18,10 +18,10 @@ $("#inscription-form").on("submit", function(e){
         // modification du libellé du bouton    
         if ($register == 1) {
             $("#register").val('0'); 
-            $(".managebutton").text("Annuler Inscription !"); 
+            $(".managebutton").text("J'annule mon inscription !"); 
         } else {
             $("#register").val('1'); 
-            $(".managebutton").text("S'inscrire !");  
+            $(".managebutton").text("Je m'inscris à cette formation !");  
         }
     })
     .fail(function(){

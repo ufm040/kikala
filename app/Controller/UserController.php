@@ -44,22 +44,20 @@ class UserController extends Controller
 
 			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");	 
 			$validator->validateNotEmpty($email,"email","L'email est obligatoire !");	 
-			$validator->validateNotEmpty($password,"password","Choisir un mot de passe");	
-			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe");	
-			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom");	
-			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom");	
-			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre date de naissance");	
+			$validator->validateNotEmpty($password,"password","Choisir un mot de passe !");	
+			$validator->validateNotEmpty($passwordConfirm,"passwordConfirm","Ressaisir le mot de passe !");	
+			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom !");	
+			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom !");	
+			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre année de naissance !");	
 			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
-			$validator->validateNotEmpty($job,"job","Saisir votre métier");	
+			$validator->validateNotEmpty($job,"job","Saisir votre métier !");	
 			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
 			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
-			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
-			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");
 
 			if ( $validator->isValid()) {			
 				$validator->validateEmail($email,"email","L'email est incorrect !");
-				$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099");
-				$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits");
+				$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099 !");
+				$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits !");
 			}
 
 			if ( !$validator->isValid()) {
@@ -329,7 +327,9 @@ class UserController extends Controller
 		$this->showForbidden();
 	}
 
-
+	/**
+	 * Page détail de mon compte 
+	 */
 	public function detailAccount($username) 
 	{
 		
@@ -363,8 +363,12 @@ class UserController extends Controller
 			// sinon page interdite	
 			$this->showForbidden();	
 		}
-		
-
 	}
 
+	/**
+	 * Page de modification du profil 
+	 */
+	public function profile($username) {
+		$this->show('user/profile');
+	}
 }

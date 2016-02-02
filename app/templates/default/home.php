@@ -12,12 +12,12 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					Choisissez parmi les <?= $nbrFormation ?> formations proposées
+					Choisissez parmi les <?= $nbrFormation ?> formations proposées !
 				</div>
 			</div>		
 			<div class="col-md-6 col-sm-12">
 				<div class="homecase">
-					<?= $nbrKikologue ?> kikologues inscrits
+					<?= $nbrKikologue ?> kikologues inscrits !
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-12">

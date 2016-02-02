@@ -190,6 +190,7 @@ header h1 a:hover {
 	padding: 30px 5px;
 	animation:1s showhomecase;
 }
+
 @keyframes showhomecase {
 	0% {
 		opacity:1;	
@@ -262,7 +263,7 @@ footer {
 	background-color: #ECE7E3;
 }
 
-#footermenu a:hover {
+.container-fluid #footermenu a:hover {
 	color:#6B6B6A;
 }
 

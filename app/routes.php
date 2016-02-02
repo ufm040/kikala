@@ -13,7 +13,8 @@
 		['GET|POST', '/compte/deconnexion/', 'User#logout', 'logout'],
 		['GET|POST', '/compte/mot-de-passe-oublie/', 'User#forgetpassword', 'forgetpassword'],
 		['GET|POST', '/compte/newpassword/[:token]/[:username]/', 'User#newpassword', 'newpassword'],
-		['GET', '/compte/profil/[:username]/', 'User#detailAccount', 'detail_account'],
+		['GET', '/mon-compte/accueil/[:username]/', 'User#detailAccount', 'detail_account'],
+		['GET', '/mon-compte/profil/[:username]/', 'User#profile', 'profile'],
 
 		// kikologue
 		['GET', '/kikologue/[:username]/', 'User#detailAccount', 'detail_kikologue'],

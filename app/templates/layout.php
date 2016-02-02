@@ -33,7 +33,7 @@
 							<ul>
 								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
 									<ul>
-										<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>">Mon profil</a></li>
+										<li><a href="<?= $this->url('profile',['username'=>$w_user['username']])?>">Mon profil</a></li>
 										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>">Mes formations</a></li>
 										<li><a href="#">Mes inscriptions</a></li>
 										<?php if ($w_user['credit']>0) : ?>
