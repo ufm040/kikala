@@ -22,7 +22,7 @@
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
 		['GET|POST', '/formation/liste/[:username]/[:slug]/', 'Formation#listFormations', 'list_formations'],
 		['GET|POST', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
-
+		['GET','/formation/credit/[:token]/','Formation#creditKikos','credit_kikos'],
 
 		// inscriptions
 		['GET|POST', '/', 'Inscription#manageInscriptions', 'inscription_formation'],

@@ -16,7 +16,7 @@ class UserManager extends \W\Manager\UserManager
 	}
 
 
-	public function manageKikos($userId , $action)
+	public function manageKikos($userId , $action , $count=1)
 	{
 		// ajoute ou supprime un kiko à une utilisateur 
 		$val = array('del' , 'add');	
@@ -26,12 +26,12 @@ class UserManager extends \W\Manager\UserManager
 
 		$sql = "UPDATE " . $this->table . " SET ";
 		if ( $action == 'add') {
-			$sql .= "credit =  credit + 1 ";
+			$sql .= "credit =  credit + " . $count;
 		} else {
-			$sql .= "credit =  credit - 1 ";	
+			$sql .= "credit =  credit - " . $count;	
 		}
 		
-		$sql .= "WHERE id = :userId;";
+		$sql .= " WHERE id = :userId;";
 
 		$sth = $this->dbh->prepare($sql);
 

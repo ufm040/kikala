@@ -208,5 +208,31 @@ class FormationController extends Controller
 		}
 		$this->show('formation/formationregister' ,  ['error' => $error]);
 	}
-	
+
+	public function creditKikos($token)
+	{
+		if ( $token == '1836456b0a97a774322v93511001' ) {
+			// Va récupérer toutes les formations avec top_credit = 0
+			$newformation = new \Manager\FormationManager();
+			$listes = $newformation->listFormationsToCredit();
+
+			// Pour chacun des formations récupérer :
+			foreach ($listes as $key => $value) {
+				// Compte le nombre d'inscrit à cette formation
+				$newinscription = new \Manager\InscriptionManager();
+				$nbrInscrit = $newinscription->countInscription($value['formationId']);
+				// crédite le formateur de kikos = au nombre d'inscrits
+				if ($nbrInscrit > 0) {
+					$newuser = new \Manager\UserManager(); 	
+					$newuser->manageKikos($value['userId'] , 'add' , $nbrInscrit);
+				}	
+				// Mise à jour du top Credit
+				$newformation->update(['topCredit'=>1] ,$value['formationId'] );		
+			}			
+		}
+		else {
+			$this->showForbidden();
+		}
+
+	}
 }

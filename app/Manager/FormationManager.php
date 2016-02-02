@@ -58,4 +58,18 @@ class FormationManager extends \W\Manager\Manager
 		return $sth->fetchAll();	
 	}
 
+	// Fonction qui récupére les formations après une date 
+	public function listFormationsToCredit(){
+
+		$sql = "SELECT id  as formationId, userId  FROM " . $this->table;
+
+		$sql .= " WHERE topCredit = 0 and dateFormation < now()";
+
+		$sth = $this->dbh->prepare($sql);
+
+		$sth->execute();
+		return $sth->fetchAll();	
+
+	}
+
 }
