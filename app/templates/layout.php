@@ -16,19 +16,20 @@
 	<div class="container-fluid push">
 		<header>
 			<div class="row">
-				<div class="col-sm-4 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-6">
 					<h1><a href="<?= $this->url('home')?>" title="Accueil">Kikala !</a></h1>
 				</div>	
-				<div class="col-sm-8 col-xs-12">
-					<div id="headconnect">
-						<div class="col-sm-6 col-xs-6 yo">
+				<div class="col-md-8 col-sm-6 col-xs-6">
+					<!--div id="headconnect"-->
+					<div class="row" id="headconnect">
+						<div class="col-sm-6 col-xs-6">
 							<?php if ($w_user['id']) {?> 
 								<a href="<?= $this->url('logout')?>" title="Inscription"><i class="fa fa-power-off"></i>Déconnexion</a>
 							<?php } else { ?>
 								<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
 							<?php }	?>
 						</div>
-						<div class="col-sm-6 col-xs-6 yo">
+						<div class="col-sm-6 col-xs-6">
 							<?php if ($w_user['id']) {?> 
 							<ul>
 								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
@@ -52,12 +53,16 @@
 				</div>
 			</div>	
 
-			<nav id="headmenu" class="clearfix">
-				<ul>
-					<li><a href="<?= $this->url('list_formations',['username'=>'all','slug'=>1]) ?>" title="Formations">Je cherche une formation</a></li>
-					<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
-				</ul>
-			</nav>			
+			<div class="row">
+				<div class="col-sm-12">	
+					<nav id="headmenu" class="clearfix">
+						<ul>
+							<li><a href="<?= $this->url('list_formations',['username'=>'all','slug'=>1]) ?>" title="Formations">Je cherche une formation</a></li>
+							<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
+						</ul>
+					</nav>
+				</div>	
+			</div>		
 			</header>
 
 			<section>
