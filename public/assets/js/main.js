@@ -14,7 +14,7 @@ $("#inscription-form").on("submit", function(e){
     })
     .done(function(message){
         // Affiche le message de confirmation
-        $("#response-inscription").html(message);
+        $("#response-inscription").html(message[0]);
         // modification du libellé du bouton    
         if ($register == 1) {
             $("#register").val('0'); 
@@ -23,6 +23,32 @@ $("#inscription-form").on("submit", function(e){
             $("#register").val('1'); 
             $(".managebutton").text("Je m'inscris à cette formation !");  
         }
+        // rafraichir le nombre de kikala sur son compte 
+        switch (parseInt(message[1])) {
+            case 0 :             
+                $text = "Je n'ai plus de kiko...";
+                $(".nbr-kikala").text($text);
+                $(".nbr-kikala").append('<i class="fa fa-frown-o"></i>');
+                break;
+            case 1 :
+                $text = "J'ai "+message[1]+" kiko" ;
+                $(".nbr-kikala").text($text);
+                break;
+            default:
+                $text = "J'ai "+message[1]+" kikos" ;
+                $(".nbr-kkala").text($text); 
+            }   
+        
+
+        // rafraichir le nombre de places restante
+        $v = $(".nbr-place").html();
+        if ($register == 1) {
+            $v = parseInt($v) -1 ;
+            $(".nbr-place").text($v);   
+        } else {
+            $v = parseInt($v) +1 ;
+            $(".nbr-place").text($v); 
+        } 
     })
     .fail(function(){
         $("#response-inscription").html("Une erreur est survenue, nous n'avons pas pu traiter votre demande");

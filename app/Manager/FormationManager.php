@@ -31,31 +31,45 @@ class FormationManager extends \W\Manager\Manager
 
 	// Fonction liste de toutes les formations à venir 
 
-	public function listFormations() {
+	public function listFormations($userId,$iter) {
+
+		$records_per_page = 5;
+		$starting_position=0;
+		if ($iter > 1) {
+			$starting_position=($iter-1) * $records_per_page;		
+		}
+
 		$sql = "SELECT * FROM " . $this->table;
-		$sql .= " WHERE dateFormation >= now() ";
-		$sql .= "ORDER BY dateFormation ASC  LIMIT 30 ;" ;
+		if (  !$userId ) {
+			$sql .= " WHERE dateFormation >= now()";	
+		} else {
+			$sql .= " WHERE userId = :userId ";	
+		}
+		
+		$sql .= "ORDER BY dateFormation ASC LIMIT $starting_position , $records_per_page  ;" ;
 
 		$sth = $this->dbh->prepare($sql);
+
+		if ($userId) {
+			$sth->bindValue(":userId", $userId);	
+		}
 
 		$sth->execute();
 		return $sth->fetchAll();	
 	}
 
-	// Fonction liste des formations d'un user 
+	// Fonction qui récupére les formations après une date 
+	public function listFormationsToCredit(){
 
-	public function listFormationsByUser($userId) {
+		$sql = "SELECT id  as formationId, userId  FROM " . $this->table;
 
-
-		// recherche des utilisateur 
-		$sql = "SELECT * FROM " . $this->table;
-		$sql .= " WHERE userId = :userId ";
-		$sql .= "ORDER BY dateFormation ASC LIMIT 5 ;" ;
+		$sql .= " WHERE topCredit = 0 and dateFormation < now()";
 
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindValue(":userId", $userId);
 
 		$sth->execute();
-		return $sth->fetchAll();		
+		return $sth->fetchAll();	
+
 	}
+
 }
