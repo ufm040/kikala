@@ -41,7 +41,7 @@
 		    		</div>
 		    		<div class="col-sm-4 col-xs-4">
 						<label for="duration">Durée de la formation</label>
-						<input id="duration" type="time" name="duration" placeholder="Durée" value="<?= (!empty($_POST['duration'])) ? $_POST['duration'] : '' ;?>">
+						<input id="duration" type="text" name="duration" placeholder="Durée" value="<?= (!empty($_POST['duration'])) ? $_POST['duration'] : '' ;?>">
 						<p class="error"><?= (!empty($error['duration'])) ? $error['duration'] : '' ;?></p>
 					</div>
 					<div class="col-sm-4 col-xs-4">

@@ -15,6 +15,13 @@
 					<td><strong>Lieu : </strong><?= $formation['city'] ?></td>
 					<td><strong>Créé le : </strong><?= $formation['dateCreated'] ?></td>
 					<td><a href="<?= $this->url('detail_formation', ['id' =>$formation['id']]) ?>" title="Voir le détail de la formation">Voir le détail de la formation</a></td>			
+					<td class="visuel">
+						<?php if ($formation['news']) : ?>
+							<i> Nouvelle Formation </i>
+						<?php elseif ($formation['msg']) : ?>
+							<i> <?= $formation['msg'] ?>
+						<?php endif; ?>	
+					</td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>		

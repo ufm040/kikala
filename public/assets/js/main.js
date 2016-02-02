@@ -111,6 +111,7 @@ $("#dateform").datepicker({
 $('#duration').timepicker({
     'language':'fr',
     'showMeridian':false,
+    'showSeconds': false,
     'defaultTime':'01:00'
 });
 
