@@ -21,12 +21,13 @@
 
 		// formation
 		['GET|POST', '/formation/creation/', 'Formation#formationregister', 'formationregister'],
-		['GET', '/formation/liste/[:username]/', 'Formation#listFormations', 'list_formations'],
+		['GET|POST', '/formation/liste/[:username]/[:slug]/', 'Formation#listFormations', 'list_formations'],
 		['GET|POST', '/formation/detail/[:id]/', 'Formation#detailFormation', 'detail_formation'],
-
+		['GET','/formation/credit/[:token]/','Formation#creditKikos','credit_kikos'],
 
 		// inscriptions
-		['GET|POST', '/', 'Inscriptions#manageInscriptions', 'inscription_formation'],
+		['GET|POST', '/', 'Inscription#manageInscriptions', 'inscription_formation'],
+		['GET', '/inscriptions/[:username]/[:slug]/', 'Inscription#listInscriptions', 'list_inscriptions'],
 
 		// user profile
 	);

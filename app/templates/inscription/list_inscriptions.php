@@ -1,3 +1,4 @@
+
 <?php $this->layout('layout', ['title' => 'Liste des formations']) ?>
 
 <?php $this->start('main_content') ?>
@@ -21,10 +22,10 @@
 		</table>
 		<div class="clearfix">
 		<?php if ($prec > 0) : ?>
-			<a class="button-list" id="button-prev" href="<?= $this->url('list_formations',["username"=>'all',"slug"=>$prec]) ?>"><i class="fa fa-angle-double-left fa-2x"></i></a>
+			<a class="button-list" id="button-prev" href="<?= $this->url('list_inscriptions',["username"=>$w_user['username'],"slug"=>$prec]) ?>"><i class="fa fa-angle-double-left fa-2x"></i></a>
 		<?php endif ;
 		if ($next) : ?>
-			<a class="button-list" id="button-next" href="<?= $this->url('list_formations',["username"=>'all',"slug"=>$next]) ?>"><i class="fa fa-angle-double-right fa-2x"></i></a>
+			<a class="button-list" id="button-next" href="<?= $this->url('list_inscriptions',["username"=>$w_user['username'],"slug"=>$next]) ?>"><i class="fa fa-angle-double-right fa-2x"></i></a>
 		<?php endif ; ?>
 		</div>		
 	</div>

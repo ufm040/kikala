@@ -77,11 +77,11 @@ header h1 {
 	padding: 10px 5px;
 	border-radius: 3px;
 	background-color: #E25B34;
-	margin: 30px 0 20px 5px;
+	margin: 10px 0 20px 5px;
 	width: 100%;
 	position: absolute;
 	z-index: 10;
-	right: 15;
+	right: 30px;
 }
 
 #headconnect ul {
@@ -271,7 +271,8 @@ footer {
 @media (min-width: 550px) {
 	/* header */
 	#headconnect {
-		width: 55%;
+		/*width: 55%;*/
+		top : 0px;
 	}
 
 	/* home page */
@@ -318,3 +319,28 @@ footer {
 		padding-left: 280px;
 	}
 } 
+
+
+
+/****************************************/
+/*          Boutton de pagination       */
+/****************************************/
+
+#button-prev {
+	float:left;
+	margin-left: 15px;
+}
+#button-next {
+	float:right;
+	margin-right: 15px;
+}
+
+.button-list {
+	padding: 0 20px;
+	margin-bottom: 10px;
+	background-color: #709EA9;
+}
+
+i.fa {
+	color:#FFF;
+}
