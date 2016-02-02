@@ -7,7 +7,7 @@
 
 	<p><?= $this->e($formation['description'])?> </p>
 	<img src="<?= $this->assetUrl('img/formations/src/'.$formation['image']) ?>">
-	<p>Nombre de places restante : <?= $nbrPlace ?></p>
+	<p>Nombre de places restante : <span class="nbr-place"><?= $nbrPlace ?></span></p>
 
 	<p>Formation donnée par <a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username']])?>"><?= $kikologue['username'] ?></a> </p>
 

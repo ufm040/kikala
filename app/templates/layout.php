@@ -37,9 +37,9 @@
 										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username'],'slug'=>1]) ?>">Mes formations</a></li>
 										<li><a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>">Mes inscriptions</a></li>
 										<?php if ($w_user['credit']>0) : ?>
-											<li>J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>
+											<li class="nbr-kikala">J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>
 										<?php else : ?>	
-											<li>Je n'ai plus de kikos ... <i class="fa fa-frown-o"></i></li>	
+											<li class="nbr-kikala">Je n'ai plus de kikos ... <i class="fa fa-frown-o"></i></li>	
 										<?php endif ?>	
 									</ul>
 								</li>

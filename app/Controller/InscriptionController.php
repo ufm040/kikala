@@ -69,8 +69,9 @@ class InscriptionController extends Controller
 
 
 		if (! $authentificationManager->getLoggedUser()) {
-			$message = 'Merci de vous connecter pour vous inscrire à une formation';	
+			$message[] = 'Merci de vous connecter pour vous inscrire à une formation';	
 		} else {
+			$authentificationManager->refreshUser();
 			$loggedUser = $this->getUser();
 
 			$newinscription = new \Manager\InscriptionManager();
@@ -86,7 +87,7 @@ class InscriptionController extends Controller
 				if ($insert) {
 					// Inscription : supprimer un kiko à l'user  
 					$newuser->manageKikos($loggedUser['id'],'del');	
-					$message = 'Vous êtes bien inscrit !';	
+					$message[] = 'Vous êtes bien inscrit !';	
 				}								
 			} else {
 				// Annulation d'une inscription				
@@ -94,10 +95,12 @@ class InscriptionController extends Controller
 				if ($del) {
 					// Désinscription : on ajoute un kiko à l'user  
 					$newuser->manageKikos($loggedUser['id'],'add');	
-					$message = 'Votre annulation a bien été pris en compte !';		
+					$message[] = 'Votre annulation a bien été pris en compte !';		
 				}			
 			}
 			$authentificationManager->refreshUser();
+			$loggedUser = $this->getUser();
+			$message[] = $loggedUser['credit'];
 		}	
 
 		$messagesJson = json_encode($message);
