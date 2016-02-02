@@ -34,8 +34,8 @@
 								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
 									<ul>
 										<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>">Mon profil</a></li>
-										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>">Mes formations</a></li>
-										<li><a href="#">Mes inscriptions</a></li>
+										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username'],'slug'=>1]) ?>">Mes formations</a></li>
+										<li><a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>">Mes inscriptions</a></li>
 										<?php if ($w_user['credit']>0) : ?>
 											<li>J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>
 										<?php else : ?>	
@@ -54,7 +54,7 @@
 
 			<nav id="headmenu" class="clearfix">
 				<ul>
-					<li><a href="<?= $this->url('list_formations',['username'=>'all']) ?>" title="Formations">Je cherche une formation</a></li>
+					<li><a href="<?= $this->url('list_formations',['username'=>'all','slug'=>1]) ?>" title="Formations">Je cherche une formation</a></li>
 					<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 				</ul>
 			</nav>			

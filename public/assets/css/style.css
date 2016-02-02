@@ -317,3 +317,28 @@ footer {
 		padding-left: 280px;
 	}
 } 
+
+
+
+/****************************************/
+/*          Boutton de pagination       */
+/****************************************/
+
+#button-prev {
+	float:left;
+	margin-left: 15px;
+}
+#button-next {
+	float:right;
+	margin-right: 15px;
+}
+
+.button-list {
+	padding: 0 20px;
+	margin-bottom: 10px;
+	background-color: #709EA9;
+}
+
+i.fa {
+	color:#FFF;
+}

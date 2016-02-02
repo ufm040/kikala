@@ -27,7 +27,7 @@ class FormationController extends Controller
 		if ($authentificationManager->getLoggedUser()) {
 			$loggedUser = $this->getUser();
 			// utilisateur est-il déjà inscrit à la formation ?
-			$inscription = new \Manager\InscriptionsManager();	
+			$inscription = new \Manager\InscriptionManager();	
 
 			$register = $inscription->checkInscription($id, $loggedUser['id']);
 			$kikos = true;
@@ -63,26 +63,50 @@ class FormationController extends Controller
 	 */	
 
 
-	public function listFormations($userName,$toShow = false){
-
+	public function listFormations($userName,$slug,$toShow = false){
+		
 		$formationManager = new \Manager\FormationManager();
+
+
 		if ($userName == 'all') {
-			$formations = $formationManager->listFormations();
-			
+			$userId = false ;
 		} else {
-			$userId = $this->getUser()['id'];
-			$formations = $formationManager->listFormationsByUser($userId);	
+			$userId = $this->getUser()['id'];		
+		}
+		$formations = $formationManager->listFormations($userId,$slug);
+
+
+		// mise en forme pour affichage de la date et la durée
+
+		foreach ($formations as $key => $value) {
+			$date = \DateTime::createFromFormat('Y-m-d H:i:s',$value['dateFormation']); 
+			$formations[$key]['dateFormation'] = $date->format('j/m/Y');
+			$date = \DateTime::createFromFormat('Y-m-d H:i:s',$value['dateCreated']); 
+			$formations[$key]['dateCreated'] = $date->format('j/m/Y');	
+			$duration = explode(":",$value['duration']);
+			$formations[$key]['duration'] = $duration[0].'h'.$duration[1] .'min';												
+		}
+		$next = $slug +1 ;
+
+		if (count($formations) < 5) {
+			$next = false;
+		}
+		if (count($formations) == 5) {
+			$suite = $formationManager->listFormations($userId,$slug+1);
+			if ( count($suite) == 0 ) {
+				$next = false;	
+			} 
 		}
 
 		if ( !$toShow) {
 			$this->show('formation/list_formations',[
-				"formations" => $formations
+				"formations" => $formations,
+				"prec"=> $slug-1,
+				"next"=>$next
 			]);				
 		} else {
 			return $formations ;
 		}
-	
-
 	}
 	
 

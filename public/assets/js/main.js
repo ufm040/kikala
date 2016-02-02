@@ -29,6 +29,39 @@ $("#inscription-form").on("submit", function(e){
     });  
 });
 
+/*$('#prev').click(function(e){
+    e.preventDefault();
+    var $prev = $('#first-id').val(); 
+    console.log($("#page-form").serialize());
+    $.ajax({
+        "url":$("#page-form").attr("action"),
+        "type":$("#page-form").attr("method"),
+        "data":$("#page-form").serialize()
+    })
+    .done(function(message){
+        console.log('OK');
+    }) 
+    .fail(function() {
+        console.log('fail');
+    })  
+})
+$('#next').click(function(e){
+    e.preventDefault();
+    var $prev = $('#last-id').val(); 
+    console.log($("#page-form").serialize());
+    $.ajax({
+        "url":$("#page-form").attr("action"),
+        "type":$("#page-form").attr("method"),
+        "data":$("#page-form").serialize()
+    })
+    .done(function(message){
+        console.log('OK');
+    }) 
+    .fail(function() {
+        console.log('fail');
+    })  
+})*/
+
 
 // FORMULAIRE
 

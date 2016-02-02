@@ -5,8 +5,56 @@ namespace Controller;
 
 use \W\Controller\Controller;
 
-class InscriptionsController extends Controller
+class InscriptionController extends Controller
 {
+	
+	/***
+	*	Page liste inscriptions 
+	*/
+
+	public function listInscriptions($userName,$slug)
+	{
+		$userId = $this->getUser()['id'];	
+
+		$newinscription = new \Manager\InscriptionManager();
+
+		$liste = $newinscription->listInscriptions($userId,$slug);
+
+		$formations = [];
+
+		foreach ($liste as $key => $value) {
+			$newformation = new \Manager\FormationManager();
+			$formations[] = $newformation->find($value['formationId']);
+		}
+
+		foreach ($formations as $key => $value) {
+			$date = \DateTime::createFromFormat('Y-m-d H:i:s',$value['dateFormation']); 
+			$formations[$key]['dateFormation'] = $date->format('j/m/Y');
+			$date = \DateTime::createFromFormat('Y-m-d H:i:s',$value['dateCreated']); 
+			$formations[$key]['dateCreated'] = $date->format('j/m/Y');	
+			$duration = explode(":",$value['duration']);
+			$formations[$key]['duration'] = $duration[0].'h'.$duration[1] .'min';												
+		}
+		$next = $slug +1 ;
+
+		if (count($formations) < 5) {
+			$next = false;
+		}
+		if (count($formations) == 5) {
+			$suite = $newinscription->listInscriptions($userId,$slug+1);
+			if ( count($suite) == 0 ) {
+				$next = false;	
+			} 
+		}		
+
+		$this->show('inscription/list_inscriptions',[
+				"formations" => $formations,
+				"prec"=> $slug-1,
+				"next"=>$next
+			]);			
+
+	}
+
 	/**
 	 * Page Inscription d'une formation
 	 */
@@ -25,7 +73,7 @@ class InscriptionsController extends Controller
 		} else {
 			$loggedUser = $this->getUser();
 
-			$newinscription = new \Manager\InscriptionsManager();
+			$newinscription = new \Manager\InscriptionManager();
 			$newuser = new \Manager\UserManager(); 
 			if ( $_POST['register'] == 1 ) {
 				
@@ -49,7 +97,7 @@ class InscriptionsController extends Controller
 					$message = 'Votre annulation a bien été pris en compte !';		
 				}			
 			}
-			//$authentificationManager->refreshUser();
+			$authentificationManager->refreshUser();
 		}	
 
 		$messagesJson = json_encode($message);
