@@ -77,7 +77,7 @@ class UserController extends Controller
 
 				if ($userManager->usernameExists($username)) {
 					$isValid = false;
-					$error['username'] = 'Ce Pseudo est déjà utlisé !';					
+					$error['username'] = 'Ce pseudo est déjà utlisé !';					
 				}
 
 				// erreur sur le mdp

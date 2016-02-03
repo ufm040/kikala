@@ -75,8 +75,6 @@ header h1 {
 #headconnect {
 	float: right;	
 	padding: 10px 5px;
-	border-radius: 3px;
-	background-color: #E25B34;
 	margin: 10px 0 20px 5px;
 	width: 100%;
 	position: absolute;
@@ -114,6 +112,16 @@ header h1 {
 	color:#fff;
 	padding: 0 5px;
 }
+
+#headconnect div {
+	border-radius: 3px;
+	background-color: #E25B34;
+}
+
+#headconnect div:nth-child(2) {
+	margin-left: -5px;
+}
+
 
 header h1 a {
 	font-family: 'Cookie', cursive;
