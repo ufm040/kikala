@@ -5,7 +5,7 @@
 
 	<section class="kik-list row container-fluid">
 		<?php foreach($formations as $formation) : ?>
-		<article class="kik col-sm-6 col-lg-4">
+		<article class="kik col-xs-12 col-sm-6 col-md-3">
 			<a class="thumbnail" href="<?= $this->url('detail_formation', ['id' =>$formation['id']]) ?>" title="Voir le détail de la formation">
 				<img src="<?= $this->assetUrl('img/formations/thumbnail/'.$formation['image']) ?>" alt="<?= $formation['title'] ?>" class="img-thumbnail">
 				<h3><?= $formation['title'] ?></h3>

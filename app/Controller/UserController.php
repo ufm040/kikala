@@ -14,7 +14,7 @@ class UserController extends Controller
 	public function register()
 	{
 		$error = array() ;	
-
+		$isValid = true;
 		// si l'utilisateur est déjà connecté => redirige vers la page "Mon compte"
 		$authentificationManager = new \W\Security\AuthentificationManager;
 
@@ -77,7 +77,7 @@ class UserController extends Controller
 
 				if ($userManager->usernameExists($username)) {
 					$isValid = false;
-					$error['username'] = 'Ce pseudo est déjà utlisé !';					
+					$error['username'] = 'Ce Pseudo est déjà utlisé !';					
 				}
 
 				// erreur sur le mdp
@@ -88,11 +88,13 @@ class UserController extends Controller
 			}
 
 
+
 			// upload du fichier 
 			if($_FILES['image']['size']!= 0) {
 				$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/users/');
 
 				$file->uploadFile();
+				$file->reduceImage(false);
 
 				if (!$file->isValid()) {
 					$isValid = false;
@@ -112,16 +114,16 @@ class UserController extends Controller
 				// on insère en base de données
 				// 2 - on appelle la méthode insert
 				$user = $userManager->insert([
-					"username" => $username,
-					"email" => $email ,
-					"password" => password_hash($password,PASSWORD_DEFAULT),
-					"lastname" => $lastname,
-					"firstname" => $firstname,
-					"birthyear" => $birthyear,
-					"sex" => $sex,
-					"job" => $job,
-					"instructorDescription" => $instructorDescription,
-					"studentDescription" => $studentDescription,
+					"username" => $_POST['username'],
+					"email" => $_POST['email'] ,
+					"password" => password_hash($_POST['password'],PASSWORD_DEFAULT),
+					"lastname" => $_POST['lastname'],
+					"firstname" => $_POST['firstname'],
+					"birthyear" => $_POST['birthyear'],
+					"sex" => $_POST['sex'],
+					"job" => $_POST['job'],
+					"instructorDescription" => $_POST['instructorDescription'],
+					"studentDescription" => $_POST['studentDescription'],
 					"credit"=>2,
 					"image" => $_SESSION['image_user'],
 					"dateCreated" => date("Y-m-d H:i:s")
@@ -354,7 +356,7 @@ class UserController extends Controller
 			// renvoi page détail kikologue
 			if ( $userConnect['username'] != $username) {
 				$newform  = new \Controller\FormationController();
-				$formations = $newform -> listFormations($user['username'],true); 
+				$formations = $newform->listFormations($user['username'], 1,true); 
 				$this->show('user/detail_kikologue', ['kikologue'=>$user , 'formations'=>$formations]);
 			// Sinon renvoie page détail account
 			} else  {
@@ -371,8 +373,125 @@ class UserController extends Controller
 	/**
 	 * Page de modification du profil 
 	 */
-	public function profile()
+	public function profile($username)
 	{
-		$this->show('user/profile');
+		$error = array() ;
+		$isValid = true;
+
+		//  on crée l'instance UserManager 
+		$userManager = new \Manager\UserManager();
+
+		// on crée une instance security manager
+		$authentificationManager = new \W\Security\AuthentificationManager;
+
+		// - on récupère l'utilisateur connecté
+		$userConnect = $authentificationManager -> getLoggedUser() ;			
+
+		// formulaire soumis ?
+		if($_POST){
+			$username = $_POST['username'];
+			$lastname = $_POST['lastname'];
+			$firstname = $_POST['firstname'];
+			$birthyear = $_POST['birthyear'];
+			$sex = $_POST['sex'];
+			$job = $_POST['job'];
+			$instructorDescription = $_POST['instructorDescription'];
+			$studentDescription = $_POST['studentDescription'];
+
+			// validation des données => à coder
+			$isValid = true;
+
+			// Contrôle des champs obligatoires sur la formation
+			$validator = new \Utils\FormValidator();
+
+			$validator->validateNotEmpty($username,"username","Le pseudo est obligatoire !");	 
+			$validator->validateNotEmpty($lastname,"lastname","Saisir votre nom !");	
+			$validator->validateNotEmpty($firstname,"firstname","Saisir votre prénom !");	
+			$validator->validateNotEmpty($birthyear,"birthyear","Saisir votre année de naissance !");	
+			$validator->validateNotEmpty($sex,"sex","Indiquer votre sexe !");
+			$validator->validateNotEmpty($job,"job","Saisir votre métier !");	
+			$validator->validateNotEmpty($instructorDescription,"instructorDescription","Saisir votre description en tant que formateur !");
+			$validator->validateNotEmpty($studentDescription,"studentDescription","Saisir votre description en tant qu'étudiant !");	
+
+			if ( $validator->isValid()) {			
+				$validator->validateYear($birthyear,"birthyear","Votre année de naissance doit être comprise entre 1900-2099 !");
+				$validator->validateCharacter($username,"username","Le pseudo comporte des caractères interdits !");
+			}
+
+			if ( !$validator->isValid()) {
+				$error = $validator ->getErrors();
+				$isValid = false;		
+			}
+
+			if ($isValid) {
+				// 1 - on crée l'instance 
+				$userManager = new \Manager\UserManager();
+
+				if($userConnect['username'] != $username) {
+					if ($userManager->usernameExists($username)) {
+						$isValid = false;
+						$error['username'] = 'Ce Pseudo est déjà utlisé !';					
+					}						
+				}
+
+				
+			}
+
+			// upload du fichier 
+			if($_FILES['image']['size']!= 0) {
+				$file = new \Utils\ImageUpload($_FILES['image'] ,'assets/img/users/');
+
+				$file->uploadFile();
+				$file->reduceImage(false);
+
+				if (!$file->isValid()) {
+					$isValid = false;
+					$error['image'] = $file->getErrors();	
+				}  else {
+					$error['image'] = 'img/users/' . $file->getFileName();
+					$_SESSION['image_user'] = $file->getFileName();
+				}						
+			} else {
+				$_SESSION['image_user'] = 'imageprofildefaut.png';
+			}
+
+			// si c'est valide 
+			if	($isValid) {
+				// Mise à jour dans la base de données
+				// 2 - on appelle la méthode update
+				$user = $userManager->update([
+					"username" => $_POST['username'],
+					"lastname" => $_POST['lastname'],
+					"firstname" => $_POST['firstname'],
+					"birthyear" => $_POST['birthyear'],
+					"sex" => $_POST['sex'],
+					"job" => $_POST['job'],
+					"instructorDescription" => $_POST['instructorDescription'],
+					"studentDescription" => $_POST['studentDescription'],
+					"image" => $_SESSION['image_user']
+				],$userConnect['id'] );
+
+				// on met à jour les données utilisateurs 			
+				$authentificationManager->refreshUser();
+				$userConnect = $authentificationManager -> getLoggedUser() ;
+			}	
+
+		} else {
+			$_POST = $userConnect;
+		}
+		
+		// 3 - on affiche la page si user trouvé					
+		if ($userConnect) {
+			if($userConnect['image'] =='') {
+				$error['image'] = 'imageprofildefaut.png';
+			} else {
+				$error['image'] =  $userConnect['image'];
+			}
+			if ( $userConnect['username'] == $username) {
+				$this->show('user/profile',['error'=>$error]);
+			}
+		} 	
+		// Sinon on redirige vers une page erreur 	
+		$this->showForbidden();				
 	}
 }

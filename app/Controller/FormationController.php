@@ -79,7 +79,7 @@ class FormationController extends Controller
 		
 		$formationManager = new \Manager\FormationManager();
 
-
+		
 		if ($userName == 'all') {
 			$userId = false ;
 		} else {

@@ -18,7 +18,7 @@
 		    			<label for="image">Une image représentant la formation</label>
 		    			<input type="file" name="image" id="image" placeholder="image" accept="image/*">
                         <div id="image_preview">
-                            <div class="thumbnail">
+                            <div class="loadimage">
                                 <img src="<?= (!empty($error['image'])) ? $this->assetUrl($error['image']) : '' ;?>" alt="">
                             </div>
                         </div>

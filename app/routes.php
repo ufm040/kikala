@@ -14,7 +14,8 @@
 		['GET|POST', '/compte/mot-de-passe-oublie/', 'User#forgetpassword', 'forgetpassword'],
 		['GET|POST', '/compte/nouveau-mot-de-passe/[:token]/[:username]/', 'User#newpassword', 'newpassword'],
 		['GET', '/mon-compte/accueil/[:username]/', 'User#detailAccount', 'detail_account'],
-		['GET', '/mon-compte/profil/[:username]/', 'User#profile', 'profile'],
+		// user profil
+		['GET|POST', '/mon-compte/profil/[:username]/', 'User#profile', 'profile'],
 
 		// kikologue
 		['GET', '/kikologue/[:username]/', 'User#detailAccount', 'detail_kikologue'],
@@ -28,6 +29,5 @@
 		// inscriptions
 		['GET|POST', '/', 'Inscription#manageInscriptions', 'inscription_formation'],
 		['GET', '/inscriptions/[:username]/[:slug]/', 'Inscription#listInscriptions', 'list_inscriptions'],
-
-		// user profile
+	
 	);

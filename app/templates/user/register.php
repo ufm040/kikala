@@ -85,7 +85,7 @@
 					<label for="image">Choisir une image de profil</label>
 					<input type="file" id="image" name="image" placeholder="Votre profil" accept="image/*">
                     <div id="image_preview">
-                        <div class="thumbnail">
+                        <div class="loadimage">
                             <img src="<?= (!empty($error['image'])) ? $this->assetUrl($error['image']) : '' ;?>" alt="">
                         </div>
                     </div>					

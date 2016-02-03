@@ -6,20 +6,30 @@
 	<div id="formationdetail">
 		<fieldset>
 			<div class="row">
-				<div class="col-sm-6 col-xs-6">
+				<div class="col-md-4 col-sm-6 col-xs-12">
 					<img src="<?= $this->assetUrl('img/formations/src/'.$formation['image']) ?>">
 				</div>
-				<div class="col-sm-6 col-xs-6">
-					<p><strong>Description : </strong><?= $this->e($formation['description'])?></p>
-					<p><strong>Date de la formation : </strong><?= $formation['dateFormation'] ?></p>
-					<p><strong>Durée de la formation : </strong><?= $formation['duration'] ?></p>
-					<p><strong>Adresse de la formation : </strong><?= $formation['address'] ?></p>
-					<p><strong>Code postal : </strong></p>
-					<p><strong>Ville : </strong><?= $formation['city'] ?></p>
-					<p><strong>Pays : </strong><?= $formation['country'] ?></p>
-					<p><strong>Nombre de places restantes : </strong><?= $nbrPlace ?></p>
-					<p>Formation donnée par <a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username']])?>"><?= $kikologue['username'] ?></a> </p>
-
+				<div class="col-md-8 col-sm-6 col-xs-12">
+					<dl class="dl-horizontal">
+						<dt>Description</dt>
+						<dd><?= $this->e($formation['description'])?></dd>
+						<dt>Date de la formation</dt>
+						<dd><?= $formation['dateFormation'] ?></dd>
+						<dt>Durée</dt>
+						<dd><?= $formation['duration'] ?></dd>
+						<dt>Adresse</dt>
+						<dd><?= $formation['address'] ?></dd>
+						<dt>Code postal</dt>
+						<dd><?= $formation['zip'] ?></dd>
+						<dt>Ville</dt>
+						<dd><?= $formation['city'] ?></dd>
+						<dt>Pays</dt>
+						<dd><?= $formation['country'] ?></dd>
+						<dt>Nombre de places restantes</dt>
+						<dd><?= $nbrPlace ?></dd>
+						<dt>Formation donnée par</dt>
+						<dd><a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username']])?>"><?= $kikologue['username'] ?></a> </dd>
+					</dl>
 					<?php if ($kikos) :?>
 						<form action="<?= $this->url('inscription_formation')?>" method="POST" id="inscription-form">
 							<input type="hidden" name="formation-id" value="<?= $formation['id']?>">
