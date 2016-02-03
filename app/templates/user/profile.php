@@ -31,13 +31,13 @@
 
 				<div class="col-sm-12 col-xs-12">
 					<div class="radio-inline">
-						<input type="radio" checked="checked" name="sex" id="sexFemale" value="sex">
+						<input type="radio" <?php if ($_POST['sex']== 'F') { echo 'checked' ; }?> name="sex" id="sexFemale" value="F">
 						<label for="sexFemale">		   
 							Je suis une femme
 						</label>
 					</div>
 					<div class="radio-inline">
-						<input type="radio" name="sex" id="sexMale" value="sex">
+						<input type="radio" name="sex" <?php if ($_POST['sex']== 'M') {echo 'checked'; } ?> id="sexMale" value="H">
 						<label for="sexMale">		    
 							Je suis un homme
 						</label>
