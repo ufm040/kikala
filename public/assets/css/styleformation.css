@@ -148,10 +148,6 @@ label {
 	#registerform p, #forgetpasswordform p, #loginform p {
 		margin-left: 175px;
 	}
-		/* message d'erreur pour le bouton radio/checkbox
-		#registerform .radio-inline p {
-			margin-left: 65px;
-		}*/
 
 	/* page inscription + page connexion boutton radio/checkbox */
 	#registerform .radio-inline, #loginform .checkbox-inline, #profileform .radio-inline {
@@ -185,6 +181,7 @@ label {
 	.table-responsive tr {
 		margin: 0px 70px 30px;
 	}
+}
 
 /* Desktop Responsive */
 @media (min-width: 890px) {
