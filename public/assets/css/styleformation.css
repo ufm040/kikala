@@ -9,12 +9,12 @@ label {
 }
 
 /* message d'erreur */
-#registerform p, #formationform p, #forgetpasswordform p {
+#registerform p, #formationform p, #forgetpasswordform p, #loginform p {
 	font-size: 17px;
 	color: red;
 }
 
-#registerform p, #forgetpasswordform p {
+#registerform p, #forgetpasswordform p, #loginform p {
 	margin-left: 50px;
 	margin-bottom: 15px;
 }
@@ -28,25 +28,25 @@ label {
 }
 
 /* tous les input / textarea des formulaires */
-#formationform input, #formationform textarea, #registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
+#formationform input, #formationform textarea, #registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input, #profileform input, #profileform textarea {
 	display: block;
 	margin: 10px auto 0px;
 	width: 80%;
 	padding: 5px 0 5px 3px;
 }
 
-#formationform .btn, #registerform .btn, #loginform .btn,#forgetpasswordform .btn, #newpasswordform .btn {
+#formationform .btn, #registerform .btn, #loginform .btn,#forgetpasswordform .btn, #newpasswordform .btn, #profileform .btn {
     display: block;
     margin: 20px auto auto;
     width: 40%;
 }
 
-/* page inscription + page connexion */
-#registerform .btn, #loginform .btn, #forgetpasswordform .btn, #newpasswordform .btn {
+/* page inscription + page connexion + page profil */
+#registerform .btn, #loginform .btn, #forgetpasswordform .btn, #newpasswordform .btn, #profileform .btn {
 	margin-bottom: 30px;
 }
 
-#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label, #profileform label {
 	margin-left: 30px;
 }
 
@@ -55,8 +55,13 @@ label {
 	margin-bottom: 30px;
 }
 
+/* page connexion*/
+.col-sm-12.col-xs-12 {
+	margin-top: 30px;
+}
+
 /* page inscription + page connexion boutton radio/checkbox */
-#registerform .radio-inline, #loginform .checkbox-inline {
+#registerform .radio-inline, #loginform .checkbox-inline, #profileform .radio-inline {
 	padding: 0px;
 	margin: 10px 0 15px 30px;
 }
@@ -66,11 +71,11 @@ label {
 			margin-left: 20px;
 		}*/
 
-#registerform .radio-inline input, #loginform .checkbox-inline input {
+#registerform .radio-inline input, #loginform .checkbox-inline input, #profileform .radio-inline input {
 	width: 0%;
 }
 
-#registerform .radio-inline label, #loginform .checkbox-inline label {
+#registerform .radio-inline label, #loginform .checkbox-inline label, #profileform .radio-inline label {
 	margin: 0px;
 	padding-left: 25px;
 }
@@ -97,7 +102,7 @@ label {
 
 .table-responsive tr {
 	float: left;
-	margin: 0 50px 30px;
+	margin: 0 80px 30px;
 }
 
 .table-responsive td {
@@ -140,7 +145,7 @@ label {
 /* Tablet Responsive */
 @media (min-width: 550px) {
 	/* message d'erreur */
-	#registerform p, #forgetpasswordform p {
+	#registerform p, #forgetpasswordform p, #loginform p {
 		margin-left: 175px;
 	}
 		/* message d'erreur pour le bouton radio/checkbox
@@ -149,16 +154,16 @@ label {
 		}*/
 
 	/* page inscription + page connexion boutton radio/checkbox */
-	#registerform .radio-inline, #loginform .checkbox-inline {
+	#registerform .radio-inline, #loginform .checkbox-inline, #profileform .radio-inline {
 		margin-left: 110px;
 	}
 
 	/* page inscription + page connexion */
-	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
+	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input, #profileform input, #profileform textarea {
 		width: 60%;
 	}
 
-	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label, #profileform label {
 		margin-left: 110px;
 	}
 
@@ -176,19 +181,24 @@ label {
 		margin-bottom: 30px;
 	}
 
+	/* Liste des formations en vignette */
+	.table-responsive tr {
+		margin: 0px 70px 30px;
+	}
+
 /* Desktop Responsive */
 @media (min-width: 890px) {
 	/* message d'erreur */
-	#registerform p, #forgetpasswordform p {
+	#registerform p, #forgetpasswordform p, #loginform p {
 		margin-left: 250px;
 	}
 
 	/* page inscription + page connexion boutton radio/checkbox */
-	#registerform .radio-inline, #loginform .checkbox-inline {
+	#registerform .radio-inline, #loginform .checkbox-inline, #profileform .radio-inline {
 		margin-left: 200px;
 	}
 
-	#registerform .radio-inline:nth-child(2) {
+	#registerform .radio-inline:nth-child(2), #profileform .radio-inline:nth-child(2) {
 		margin-left: 100px;
 	}
 
@@ -198,15 +208,15 @@ label {
 		}*/
 	
 	/* page inscription + page connexion */
-	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input {
+	#registerform input, #registerform textarea, #loginform input, #forgetpasswordform input, #newpasswordform input, #profileform input, #profileform textarea {
 		width: 55%;
 	}
-	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label {
+	#registerform label, #loginform label, #loginform a, #forgetpasswordform label, #newpasswordform label, #profileform label {
 		margin-left: 200px;
 	}
 
 	/* Liste des formations en vignette */
 	.table-responsive tr {
-		margin: 0px 13px 30px;
+		margin: 0px 28px 30px;
 	}
 }

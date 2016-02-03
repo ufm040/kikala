@@ -77,7 +77,7 @@ class UserController extends Controller
 
 				if ($userManager->usernameExists($username)) {
 					$isValid = false;
-					$error['username'] = 'Ce Pseudo est déjà utlisé !';					
+					$error['username'] = 'Ce pseudo est déjà utlisé !';					
 				}
 
 				// erreur sur le mdp
@@ -200,7 +200,7 @@ class UserController extends Controller
 			} 
 			// mauvais identifiant 
 			else {
-				$errorconnect = "email inconnu ou mot de passe incorrect";	
+				$errorconnect = "Email inconnu ou mot de passe incorrect";	
 			}
 		}
 			
@@ -368,7 +368,8 @@ class UserController extends Controller
 	/**
 	 * Page de modification du profil 
 	 */
-	public function profile($username) {
+	public function profile()
+	{
 		$this->show('user/profile');
 	}
 }

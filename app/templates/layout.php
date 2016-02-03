@@ -17,14 +17,14 @@
 		<header>
 			<div class="row">
 				<div class="col-md-4 col-sm-6 col-xs-6">
-					<h1><a href="<?= $this->url('home')?>" title="Accueil">Kikala !</a></h1>
+					<h1><a href="<?= $this->url('home')?>" title="Accueil Kikala !">Kikala !</a></h1>
 				</div>	
 				<div class="col-md-8 col-sm-6 col-xs-6">
 					<!--div id="headconnect"-->
 					<div class="row" id="headconnect">
 						<div class="col-sm-6 col-xs-6">
 							<?php if ($w_user['id']) {?> 
-								<a href="<?= $this->url('logout')?>" title="Inscription"><i class="fa fa-power-off"></i>Déconnexion</a>
+								<a href="<?= $this->url('logout')?>" title="Déconnexion"><i class="fa fa-power-off"></i>Déconnexion</a>
 							<?php } else { ?>
 								<a href="<?= $this->url('login')?>" title="Connexion"><i class="fa fa-power-off"></i>Connexion</a>
 							<?php }	?>
@@ -32,11 +32,11 @@
 						<div class="col-sm-6 col-xs-6">
 							<?php if ($w_user['id']) {?> 
 							<ul>
-								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Connexion"><i class="fa fa-user"></i>Mon Compte</a>
+								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Mon compte"><i class="fa fa-user"></i>Mon Compte</a>
 									<ul>
-										<li><a href="<?= $this->url('profile',['username'=>$w_user['username']])?>">Mon profil</a></li>
-										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>">Mes formations</a></li>
-										<li><a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>">Mes inscriptions</a></li>
+										<li><a href="<?= $this->url('profile',['username'=>$w_user['username']])?>" title="Mon profil">Mon profil</a></li>
+										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>" title="Mes formations">Mes formations</a></li>
+										<li><a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes inscriptions">Mes inscriptions</a></li>
 										<?php if ($w_user['credit']>0) : ?>
 											<li class="nbr-kikala">J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>
 										<?php else : ?>	
@@ -57,7 +57,7 @@
 				<div class="col-sm-12">	
 					<nav id="headmenu" class="clearfix">
 						<ul>
-							<li><a href="<?= $this->url('list_formations',['username'=>'all','slug'=>1]) ?>" title="Formations">Je cherche une formation</a></li>
+							<li><a href="<?= $this->url('list_formations',['username'=>'all','slug'=>1]) ?>" title="Chercher une formation">Je cherche une formation</a></li>
 							<li><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></li>
 						</ul>
 					</nav>

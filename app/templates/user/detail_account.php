@@ -7,7 +7,7 @@
 			<div class="col-sm-6 col-xs-6">	
 				<p><strong>Mon pseudo : </strong><?= $user['username']?></p>
 				<img src="<?='img/users/' .$user['image']?>" alt="Image de profil">
-				<a href="">Je modifie mon profil</a>
+				<a href="<?= $this->url('profile') ?>" title="Modifier son profil">Je modifie mon profil</a>
 			</div>
 			<div class="col-sm-6 col-xs-6">
 				<p><strong>Mon email : </strong><?= $user['email'] ?></p>
