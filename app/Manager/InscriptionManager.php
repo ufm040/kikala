@@ -67,7 +67,7 @@ class InscriptionManager extends \W\Manager\Manager
 			return false;
 		}
 
-		$records_per_page = 5;
+		$records_per_page = 16;
 		$starting_position=0;
 		if ($iter > 1) {
 			$starting_position=($iter-1) * $records_per_page;		

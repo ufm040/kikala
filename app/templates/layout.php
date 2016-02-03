@@ -35,7 +35,7 @@
 								<li><a href="<?= $this->url('detail_account',['username'=>$w_user['username']])?>" title="Mon compte"><i class="fa fa-user"></i>Mon Compte</a>
 									<ul>
 										<li><a href="<?= $this->url('profile',['username'=>$w_user['username']])?>" title="Mon profil">Mon profil</a></li>
-										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username']]) ?>" title="Mes formations">Mes formations</a></li>
+										<li><a href="<?= $this->url('list_formations',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes formations">Mes formations</a></li>
 										<li><a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes inscriptions">Mes inscriptions</a></li>
 										<?php if ($w_user['credit']>0) : ?>
 											<li class="nbr-kikala">J'ai <?= $w_user['credit'] ;?> kiko<?= ($w_user['credit']>1) ? 's ' :' ' ;?>!</li>

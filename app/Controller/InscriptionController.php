@@ -33,14 +33,23 @@ class InscriptionController extends Controller
 			$date = \DateTime::createFromFormat('Y-m-d H:i:s',$value['dateCreated']); 
 			$formations[$key]['dateCreated'] = $date->format('j/m/Y');	
 			$duration = explode(":",$value['duration']);
-			$formations[$key]['duration'] = $duration[0].'h'.$duration[1] .'min';												
+			$formations[$key]['duration'] = $duration[0].'h'.$duration[1] .'min';
+			if ( $formations[$key]['image'] == '') {
+				$formations[$key]['image'] = 'defaultformation.png';	
+			}
+
+			$newTruncante = new \Utils\Truncater();
+
+			if ( strlen($formations[$key]['description']) > 30 ) {
+				$formations[$key]['description'] = $newTruncante -> tokenTruncate($formations[$key]['description'],30);
+			}		 												
 		}
 		$next = $slug +1 ;
 
-		if (count($formations) < 5) {
+		if (count($formations) < 16) {
 			$next = false;
 		}
-		if (count($formations) == 5) {
+		if (count($formations) == 16) {
 			$suite = $newinscription->listInscriptions($userId,$slug+1);
 			if ( count($suite) == 0 ) {
 				$next = false;	

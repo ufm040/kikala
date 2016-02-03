@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-xs-12">	
 				<img src="<?= $this->assetUrl('img/users/' .$user['image'])?>" alt="Image de profil">
-				<p><a href="<?= $this->url('profile') ?>">Je modifie mon profil</a></p>
+				<p><a href="<?= $this->url('profile',['username'=>$user['username']])?>">Je modifie mon profil</a></p>
 			</div>
 			<div class="col-md-8 col-sm-6 col-xs-12">
 				<dl class="dl-horizontal">
@@ -33,8 +33,8 @@
 
 				<p><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></p>
 				<div class="accountbutton">
-					<a href="<?= $this->url('inscription_formation') ?>" title="Mes formations">Mes formations</a>
-					<a href="<?= $this->url('profile') ?>">Mes inscriptions</a>	
+					<a href="<?= $this->url('list_formations',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes formations">Mes formations</a>
+					<a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes Inscriptions">Mes inscriptions</a>	
 				</div>
 						
 			</div>

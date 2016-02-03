@@ -29,5 +29,4 @@
 		// inscriptions
 		['GET|POST', '/', 'Inscription#manageInscriptions', 'inscription_formation'],
 		['GET', '/inscription/[:username]/[:slug]/', 'Inscription#listInscriptions', 'list_inscriptions'],
-
 	);
