@@ -225,3 +225,101 @@ label {
 		margin: 0px 28px 30px;
 	}
 }
+
+
+/*************************/
+/*      aspect liste     */
+/*************************/
+
+
+.visuel {
+	height: 25px;
+	text-align: center;
+	width: 78px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+    -ms-transform: rotate(-30deg); /* IE 9 */
+    -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+    transform: rotate(-30deg);	
+}
+.news {
+	background-color: #79F8F8;
+	color:#E25B34;
+}
+
+.complete {
+	background-color: #E25B34;
+	color:#fff;	
+}
+.not-delay {
+	background-color: #709EA9;
+
+}
+
+.visuel p {
+	vertical-align: middle;
+	font-size: 1em;	
+}
+
+.img-thumbnail {
+	border: none;
+	margin: 0 auto;
+	display: block;
+}
+
+
+.thumbnail {
+	border: 1.5px solid #709EA9;
+	border-radius:3px;
+	box-shadow: 3px 3px 5px #709EA9;
+}
+
+a.thumbnail:hover,div.thumbnail:hover{
+	border-color: #E25B34;
+	box-shadow: 3px 6px 5px #E25B34;
+}
+
+.kik dt , .kik dd, .kik h3 {
+	color:#5D5D5D;
+}
+.kik h3 {
+	text-align: center;
+	text-transform: uppercase;
+	font-size:1.2em;
+	color:#709EA9;
+}
+
+.kik img {
+	opacity: 0.8;
+}
+
+.kik:hover img {
+	opacity: 1.0;
+}
+
+.kik a:hover {
+	text-decoration: none;
+}
+
+.kik .dl-horizontal dt {
+	float: left;
+    width: 100px;
+  }
+.kik .dl-horizontal dd {
+    margin-left: 120px;
+}
+
+@media (max-width: 768px){
+	.dl-horizontal dt {
+		float: left;
+	    width: 100px;
+	  }
+	.dl-horizontal dd {
+	    margin-left: 120px;
+	}
+	#formationdetail {	
+		padding-left: 30px;
+	}
+}
+
