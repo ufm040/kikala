@@ -120,10 +120,10 @@ class FormationController extends Controller
 
 		$next = $slug +1 ;
 
-		if (count($formations) < 5) {
+		if (count($formations) < 16) {
 			$next = false;
 		}
-		if (count($formations) == 5) {
+		if (count($formations) == 16) {
 			$suite = $formationManager->listFormations($userId,$slug+1);
 			if ( count($suite) == 0 ) {
 				$next = false;	
