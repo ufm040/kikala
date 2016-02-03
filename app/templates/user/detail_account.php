@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-xs-12">	
 				<img src="<?= $this->assetUrl('img/users/' .$user['image'])?>" alt="Image de profil">
-				<p><a href="<?= $this->url('profile') ?>">Je modifie mon profil</a></p>
+				<p><a href="<?= $this->url('profile',['username'=>$user['username']])?>">Je modifie mon profil</a></p>
 			</div>
 			<div class="col-md-8 col-sm-6 col-xs-12">
 				<dl class="dl-horizontal">
