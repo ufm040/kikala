@@ -33,8 +33,8 @@
 
 				<p><a href="<?= $this->url('formationregister')?>" title="Créer une formation">Je crée une formation</a></p>
 				<div class="accountbutton">
-					<a href="<?= $this->url('inscription_formation') ?>" title="Mes formations">Mes formations</a>
-					<a href="<?= $this->url('profile') ?>">Mes inscriptions</a>	
+					<a href="<?= $this->url('list_formations',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes formations">Mes formations</a>
+					<a href="<?= $this->url('list_inscriptions',['username'=>$w_user['username'],'slug'=>1]) ?>" title="Mes Inscriptions">Mes inscriptions</a>	
 				</div>
 						
 			</div>

@@ -269,6 +269,7 @@ label {
 	border: 1.5px solid #709EA9;
 	border-radius:3px;
 	box-shadow: 3px 3px 5px #709EA9;
+	height: 300px;
 }
 
 a.thumbnail:hover,div.thumbnail:hover{

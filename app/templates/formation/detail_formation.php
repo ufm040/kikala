@@ -28,7 +28,7 @@
 						<dt>Nombre de places restantes</dt>
 						<dd><?= $nbrPlace ?></dd>
 						<dt>Formation donnée par</dt>
-						<dd><a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username']])?>"><?= $kikologue['username'] ?></a> </dd>
+						<dd><a href="<?= $this->url('detail_kikologue',['username'=>$kikologue['username'],'slug'=>1])?>"><?= $kikologue['username'] ?></a> </dd>
 					</dl>
 					<?php if ($kikos) :?>
 						<form action="<?= $this->url('inscription_formation')?>" method="POST" id="inscription-form">
