@@ -49,14 +49,15 @@
 				</div>
 
 				<div class="col-sm-12 col-xs-12">
+					<?php if (!empty($_POST['sex'])) {$sex = $_POST['sex'] ; } else { $sex= '' ;} ?>
 					<div class="radio-inline">
-						<input type="radio" checked="checked" name="sex" id="sexFemale" value="sex">
+						<input type="radio" <?php if ($sex != 'M') { echo 'checked' ; }?> name="sex" id="sexFemale" value="F">
 						<label for="sexFemale">		   
 							Je suis une femme
 						</label>
 					</div>
 					<div class="radio-inline">
-						<input type="radio" name="sex" id="sexMale" value="sex">
+						<input type="radio"  <?php if ($sex== 'M') { echo 'checked' ; }?> name="sex" id="sexMale" value="H">
 						<label for="sexMale">		    
 							Je suis un homme
 						</label>
@@ -85,7 +86,7 @@
 					<label for="image">Choisir une image de profil</label>
 					<input type="file" id="image" name="image" placeholder="Votre profil" accept="image/*">
                     <div id="image_preview">
-                        <div class="thumbnail">
+                        <div class="loadimage">
                             <img src="<?= (!empty($error['image'])) ? $this->assetUrl($error['image']) : '' ;?>" alt="">
                         </div>
                     </div>					

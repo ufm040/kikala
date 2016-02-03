@@ -1,14 +1,15 @@
 <?php $this->layout('layout', ['title' => 'Kikologue']) ?>
 
 <?php $this->start('main_content') ?>
-	<h2>Kikologue <?= $kikologue['lastname']?> <?= $kikologue['firstname']?></h2>
+	
 	
 			<div class="row">
 				<div class="col-sm-6 col-xs-6">	
-					<p>Votre pseudo : <?= $kikologue['username']?> </p>
-				</div>
-				<div class="col-sm-6 col-xs-6">	
 					<img src="<?= $this->assetUrl('img/users/'.$kikologue['image']) ?>" alt="Photo de profil"> 
+				</div>			
+				<div class="col-sm-6 col-xs-6">	
+					<h3><?= $kikologue['lastname']?> <?= $kikologue['firstname']?></h3>
+					<p><?= $kikologue['username']?> </p>
 				</div>
 			</div>	
 			<div class="row">

@@ -60,7 +60,7 @@ class ImageUpload {
             $tmp_name = $this->fileToUpload['tmp_name'];
             $ext = substr($infos, 6);
             $this->setFileName(uniqid(). '.' .$ext);
-            //$this->file_name = uniqid(). '.' .$ext; 
+ 
             $target = $this->route . $this->getFileName();
 
             move_uploaded_file($tmp_name, $target); 
@@ -74,7 +74,10 @@ class ImageUpload {
         $img = new \abeautifulsite\SimpleImage($this->route.$this->getFileName());
         $img->fit_to_width(300);
         $img->save();
-        $img->thumbnail(100, 75);
-        $img->save($routeDest . $this->fileName);         
+        if ($routeDest) {
+            $img->thumbnail(100, 75);
+            $img->save($routeDest . $this->fileName);            
+        }
+         
     }
 }
