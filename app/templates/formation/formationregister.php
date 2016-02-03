@@ -57,17 +57,21 @@
 			    <div class="row">
 			    	<div class="col-sm-6 col-xs-6">
 				    	<label for="address">Adresse</label>
-				    	<textarea id="address" name="address" placeholder="Lieu de la formation" rows=5 required></textarea>
+				    	<textarea id="address" name="address" placeholder="Lieu de la formation" rows=5 required><?= (!empty($_POST['address'])) ? $_POST['address'] : '' ;?></textarea>
+				    	<p class="error"><?= (!empty($error['address'])) ? $error['address'] : '' ;?></p>
 				    </div>	
 				    <div class="col-sm-6 col-xs-6">
 				    	<label for="codepostal">Code postal</label>
-				    	<input id="codepostal" name="codepostal" placeholder="Code postal" type="text" required>
+				    	<input id="codepostal" name="codepostal" placeholder="Code postal" type="text" value="<?= (!empty($_POST['codepostal'])) ? $_POST['codepostal'] : '' ;?>" required>
+				    	<p class="error"><?= (!empty($error['codepostal'])) ? $error['codepostal'] : '' ;?></p>
 
 				    	<label for="city">Ville</label>
-				    	<input id="city" name="city" placeholder="Ville" type="text" required>			    
+				    	<input id="city" name="city" placeholder="Ville" type="text" value="<?= (!empty($_POST['city'])) ? $_POST['city'] : '' ;?>" required>	
+				    	<p class="error"><?= (!empty($error['city'])) ? $error['city'] : '' ;?></p>		    
 
 				    	<label for="country">Pays</label>
-				    	<input id="country" name="country" type="text" required placeholder="France">
+				    	<input id="country" name="country" type="text" placeholder="Pays" value="<?= (!empty($_POST['country'])) ? $_POST['country'] : '' ;?>" required>
+				    	<p class="error"><?= (!empty($error['country'])) ? $error['country'] : '' ;?></p>
 				    </div>	
 			    </div>
 

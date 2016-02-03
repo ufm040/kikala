@@ -141,6 +141,11 @@ label {
 	padding-right: 15px;
 }
 
+/* détail formation */
+.dl-horizontal {
+	width: 10%;
+}
+
 
 /* Tablet Responsive */
 @media (min-width: 550px) {

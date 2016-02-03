@@ -180,6 +180,10 @@ class FormationController extends Controller
 			$validator->validateNotEmpty($dateform,"dateform","Saisir une date !");	 
 			$validator->validateNotEmpty($duration,"duration","Saisir une durée !");	 
 			$validator->validateNotEmpty($nbrplace,"nbrplace","Saisir un nombre de place !");
+			$validator->validateNotEmpty($address,"address","Saisir une adresse !");
+			$validator->validateNotEmpty($zip,"codepostal","Saisir un code postal !");
+			$validator->validateNotEmpty($city,"city","Saisir une ville !");
+			$validator->validateNotEmpty($country,"country","Saisir un pays !");
 
 			if ( !$validator->isValid()) {
 				$error = $validator ->getErrors();

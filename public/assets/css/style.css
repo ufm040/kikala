@@ -3,7 +3,7 @@ html, body {
 	font-family: 'Economica',Arial,sans-serif;
 	background-color: #FFF;
 	color: #5D5D5D;
-	font-size: 14px;
+	font-size: 15px;
 	height: 100%;
 }
 
@@ -340,9 +340,7 @@ footer {
 	background-color: #709EA9;
 }
 
-i.fa {
-	color:#FFF;
-}
+
 
 
 /*************************/
