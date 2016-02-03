@@ -22,13 +22,14 @@ class FormationController extends Controller
 		// $register : permet de contrôler si l'utilisateur peut s'inscrire à la formation
 		// $kikos : permet de contrôler si l'utilisateur a suffisemment de kikos pour s'inscrire
 		$kikos = false; 
+		$register = false;
 		$authentificationManager = new \W\Security\AuthentificationManager;
-	
+		$inscription = new \Manager\InscriptionManager();	
+
 		if ($authentificationManager->getLoggedUser()) {
 			$loggedUser = $this->getUser();
-			// utilisateur est-il déjà inscrit à la formation ?
-			$inscription = new \Manager\InscriptionManager();	
 
+			// utilisateur est-il déjà inscrit à la formation ?
 			$register = $inscription->checkInscription($id, $loggedUser['id']);
 			$kikos = true;
 			// contrôle si assez de kikos pour s'inscrire à une formation
@@ -37,9 +38,10 @@ class FormationController extends Controller
 					$kikos = false ;
 				}	
 			}
-
-			$nbrInscrit = $inscription->countInscription($id);
 		}
+
+		// Récupère le nombre d'inscrit à la formation
+		$nbrInscrit = $inscription->countInscription($id);		
 
 		// récupération des données du formateur
 
@@ -108,9 +110,9 @@ class FormationController extends Controller
 			$inscription = new \Manager\InscriptionManager();	
 			$nbrInscrit = $inscription->countInscription($formations[$key]['id']);
 			if ($nbrInscrit == $formations[$key]['totalNumberPlace']) {
-				$formations[$key]['msg'] = 'Complète';	
+				$formations[$key]['msg'] = 'complete';	
 			} else if ($date->format('U') - strtotime("+2 days") > (2*24*60*1000)) {
-				$formations[$key]['msg'] = 'Ne tardez pas';	
+				$formations[$key]['msg'] = 'not-delay';	
 			} else {
 				$formations[$key]['msg'] = false;	
 			}

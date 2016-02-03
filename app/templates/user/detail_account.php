@@ -4,12 +4,12 @@
 	<h2>Compte de <?= $user['lastname']?> <?= $user['firstname']?></h2>
 	<div id="accountdetail">
 		<div class="row">
-			<div class="col-sm-6 col-xs-6">	
+			<div class="col-sm-4 col-xs-6">	
 				<p><strong>Mon pseudo : </strong><?= $user['username']?></p>
-				<img src="<?='img/users/' .$user['image']?>" alt="Image de profil">
-				<a href="">Je modifie mon profil</a>
+				<img src="<?= $this->assetUrl('img/users/' .$user['image'])?>" alt="Image de profil">
+				<p><a href="">Je modifie mon profil</a></p>
 			</div>
-			<div class="col-sm-6 col-xs-6">
+			<div class="col-sm-8 col-xs-6">
 				<p><strong>Mon email : </strong><?= $user['email'] ?></p>
 				<p><strong>Je suis <?= $user['sex'] ?></strong></p>
 				<p><strong>Mon métier : </strong><?= $user['job'] ?></p>
