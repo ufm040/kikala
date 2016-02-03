@@ -239,6 +239,8 @@ p {
 footer {
 	background-color: #333333;
 	margin-top: -44px;
+	position: relative;
+	z-index: 1000;
 }
 
 #footermenu ul{

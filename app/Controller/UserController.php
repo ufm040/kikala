@@ -252,7 +252,7 @@ class UserController extends Controller
 
 				// envoie du resetLink par mail : appel de la classe SendMail()
 				$mail = new \Utils\EmailSender($user['email']);
-				$mail->setSubject('reset password');
+				$mail->setSubject('Changement de mot de passe');
 				$mail->setContentMessage($resetLink);
 				$mail->sendEmail();
 
