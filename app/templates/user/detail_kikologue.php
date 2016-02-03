@@ -8,7 +8,7 @@
 					<p>Votre pseudo : <?= $kikologue['username']?> </p>
 				</div>
 				<div class="col-sm-6 col-xs-6">	
-					<img src="<?='img/users/' .$kikologue['image']?>" alt="votre profil"> 
+					<img src="<?= $this->assetUrl('img/users/'.$kikologue['image']) ?>" alt="Photo de profil"> 
 				</div>
 			</div>	
 			<div class="row">

@@ -347,13 +347,16 @@ class UserController extends Controller
 		$user = $userManager->getUserByUsernameOrEmail($username);
 		// 3 - on affiche la page si user trouvé 
 		if ($user) {
-
+			if($user['image'] =='') {
+				$user['image'] = 'imageprofildefaut.png';
+			}
 			// Contrôle si l'utilisateur connecté n'est pas l'utilisateur du compte demandé
-			// renvoi pas interdit
+			// renvoi page détail kikologue
 			if ( $userConnect['username'] != $username) {
 				$newform  = new \Controller\FormationController();
 				$formations = $newform -> listFormations($user['username'],true); 
 				$this->show('user/detail_kikologue', ['kikologue'=>$user , 'formations'=>$formations]);
+			// Sinon renvoie page détail account
 			} else  {
 				$this->show('user/detail_account', ['user'=>$user]);				
 			}
