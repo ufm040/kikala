@@ -254,7 +254,7 @@ class FormationController extends Controller
 
 	public function creditKikos($token)
 	{
-		if ( $token == '1836456b0a97a774322v93511001' ) {
+		if ( $token == '1234' ) {
 			// Va récupérer toutes les formations avec top_credit = 0
 			$newformation = new \Manager\FormationManager();
 			$listes = $newformation->listFormationsToCredit();
