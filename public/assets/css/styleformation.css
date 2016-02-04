@@ -229,11 +229,20 @@ label {
 	text-align: center;
 	width: 78px;
 	position: absolute;
+	left: 180px;
+/*	top: 10px;
+	left: 10px;
+    -ms-transform: rotate(-30deg); /* IE 9 */
+/*    -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+/*    transform: rotate(-30deg);	*/
+}
+
+a.thumbnail>.visuel {	
 	top: 10px;
 	left: 10px;
     -ms-transform: rotate(-30deg); /* IE 9 */
     -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
-    transform: rotate(-30deg);	
+    transform: rotate(-30deg);
 }
 .news {
 	background-color: #79F8F8;
