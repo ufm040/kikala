@@ -29,8 +29,4 @@
 		// inscriptions
 		['GET|POST', '/', 'Inscription#manageInscriptions', 'inscription_formation'],
 		['GET', '/inscription/[:username]/[:slug]/', 'Inscription#listInscriptions', 'list_inscriptions'],
-<<<<<<< HEAD
-
-=======
->>>>>>> 55396c5ebb5bab66a9ce9ea6c472ca1c404e98fa
 	);
