@@ -107,6 +107,12 @@ class FormationController extends Controller
 				$formations[$key]['image'] = 'defaultformation.png';	
 			}
 
+			$newTruncante = new \Utils\Truncater();
+
+			if ( strlen($formations[$key]['description']) > 40 ) {
+				$formations[$key]['description'] = $newTruncante -> tokenTruncate($formations[$key]['description'],40);
+			}			
+
 			$inscription = new \Manager\InscriptionManager();	
 			$nbrInscrit = $inscription->countInscription($formations[$key]['id']);
 			if ($nbrInscrit == $formations[$key]['totalNumberPlace']) {
@@ -116,6 +122,7 @@ class FormationController extends Controller
 			} else {
 				$formations[$key]['msg'] = false;	
 			}
+
 		}
 
 		$next = $slug +1 ;

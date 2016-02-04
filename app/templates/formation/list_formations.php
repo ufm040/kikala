@@ -18,6 +18,8 @@
 					<dd><?= $formation['city'] ?></dd>
 					<dt>Créée le</dt>
 					<dd><?= $formation['dateCreated'] ?></dd>
+					<dt>Description</dt>
+					<dd><?= $formation['description'] ?></dd>
 				</dl>
 				<?php if ($formation['news']) : ?>
 					<div class="visuel news">
