@@ -120,7 +120,10 @@ header li {
 #headconnect div:nth-child(2) {
 	margin-left: -5px;
 }
-
+li.nbr-kikala {
+	padding-bottom: 10px;
+	color :#FFF;
+}
 
 header h1 a {
 	font-family: 'Cookie', cursive;
@@ -332,9 +335,9 @@ footer .fa {
 		width: 80%;
 	}
 
-	#headconnect {
+/*	#headconnect {
 		width: 60%;
-	}
+	} */
 
 	#headconnect a {	
 		font-size: 1.2em;
