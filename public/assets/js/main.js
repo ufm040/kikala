@@ -134,3 +134,4 @@ $(".responsive-bar").on('click',function(){
     $(".fa-angle-double-down").stop(true).toggleClass('hidebars');
     $(".fa-angle-double-up").stop(true).toggleClass('hidebars');
 });
+

@@ -74,7 +74,7 @@ header li {
 #headconnect {
 	float: right;	
 	padding: 10px 5px;
-	margin: 10px 0 20px 5px;
+	margin: 0 0 0 5px;
 	width: 100%;
 	position: absolute;
 	z-index: 10;
@@ -161,6 +161,13 @@ header h1 a:hover {
 	font-weight: 800;
 }
 
+header h1 a {
+	padding: 0px; 
+}
+
+#headconnect .col-sm-6.col-xs-6:first-child {
+	padding-left: 0;
+}
 
 /**********************/
 /*   Home Page        */
@@ -302,6 +309,23 @@ footer .fa {
 	#headconnect {
 		/*width: 55%;*/
 		top : 0px;
+	}
+
+	#headconnect {
+		padding: 10px 5px;
+		margin: 10px 0 20px 5px;
+	}
+
+	header h1 a {
+		padding: 20px; 
+	}
+
+	#headconnect .fa-power-off {
+		padding-left: 5px;
+	}
+
+	#headconnect .col-sm-6.col-xs-6:first-child {
+		padding-left: 0;
 	}
 
 	/* home page */
