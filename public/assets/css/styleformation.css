@@ -149,7 +149,11 @@ label {
 	#registerform p, #forgetpasswordform p, #loginform p {
 		margin-left: 175px;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> dev
 	/* page inscription + page connexion boutton radio/checkbox */
 	#registerform .radio-inline, #loginform .checkbox-inline, #profileform .radio-inline {
 		margin-left: 110px;
@@ -230,11 +234,20 @@ label {
 	text-align: center;
 	width: 78px;
 	position: absolute;
+	left: 180px;
+/*	top: 10px;
+	left: 10px;
+    -ms-transform: rotate(-30deg); /* IE 9 */
+/*    -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+/*    transform: rotate(-30deg);	*/
+}
+
+a.thumbnail>.visuel {	
 	top: 10px;
 	left: 10px;
     -ms-transform: rotate(-30deg); /* IE 9 */
     -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
-    transform: rotate(-30deg);	
+    transform: rotate(-30deg);
 }
 .news {
 	background-color: #79F8F8;

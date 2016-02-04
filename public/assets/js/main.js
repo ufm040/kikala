@@ -126,3 +126,11 @@ $("#headconnect ul ul").hide();
 $("#headconnect ul li").hover( function(){ 
   $(this).find("ul").stop(true).slideToggle(); 
 } );
+
+// MENU DEROULANT du footer en responsive 
+
+$(".responsive-bar").on('click',function(){    
+    $("#footermenu").stop(true).slideToggle("slow");
+    $(".fa-angle-double-down").stop(true).toggleClass('hidebars');
+    $(".fa-angle-double-up").stop(true).toggleClass('hidebars');
+});

@@ -72,14 +72,21 @@
 		
 		<div class="container-fluid">
 			<footer>
-				<nav id="footermenu" class="clearfix">
-					<ul>
-						<li><a href="<?php echo $this->url('home')?>" title="Accueil">Accueil</a></li>
-						<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
-						<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
-						<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
-					</ul>
-				</nav>			
+				<div class="responsive-bar">
+					<i class="fa fa-angle-double-down fa-2x"></i>
+				</div>
+					<nav id="footermenu" class="clearfix">
+						<ul>
+							<li><a href="<?php echo $this->url('home')?>" title="Accueil">Accueil</a></li>
+							<li><a href="<?= $this->url('about') ?>" title="A propos">A propos</a></li>
+							<li><a href="<?= $this->url('legals') ?>" title="Mentions Légales">Mentions Légales</a></li>
+							<li><a href="<?= $this->url('register') ?>" title="Inscription">Inscription</a></li>
+						</ul>
+					</nav>
+				<div class="responsive-bar">
+					<i class="fa fa-angle-double-up fa-2x hidebars"></i>
+				</div>					
+							
 			</footer>
 		</div>
 	
