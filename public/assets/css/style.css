@@ -115,13 +115,13 @@ header h1 {
 
 #headconnect div {
 	border-radius: 3px;
-	background-color: #E25B34;
+	background-color: #E25B34; 
 }
 
 #headconnect div:nth-child(2) {
 	margin-left: -5px;
+	padding-left: 0;
 }
-
 
 header h1 a {
 	font-family: 'Cookie', cursive;
@@ -297,6 +297,14 @@ footer {
 	/* FOOTER */
 	.container-fluid #footermenu ul {
 		padding-left: 80px;
+	}
+
+	#headconnect ul ul li a, .nbr-kikala {
+		padding-left: 30px;
+	}
+
+	.nbr-kikala {
+		padding-bottom: 5px;
 	}
 }
 
