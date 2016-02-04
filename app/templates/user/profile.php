@@ -25,7 +25,7 @@
 
 				<div class="col-sm-12 col-xs-12">		
 					<label for="birthyear">Année de naissance</label>
-					<input type="date" placeholder="Année de naissance" name="birthyear" value="<?= (!empty($_POST['birthyear'])) ? $_POST['birthyear'] : '' ;?>"/>
+					<input type="text" placeholder="Année de naissance" name="birthyear" value="<?= (!empty($_POST['birthyear'])) ? $_POST['birthyear'] : '' ;?>"/>
 					<p class="error"><?= (!empty($error['birthday'])) ? $error['birthday'] : '' ;?></p>
 				</div>
 
@@ -37,7 +37,7 @@
 						</label>
 					</div>
 					<div class="radio-inline">
-						<input type="radio" name="sex" <?php if ($_POST['sex']== 'M') {echo 'checked'; } ?> id="sexMale" value="H">
+						<input type="radio" name="sex" <?php if ($_POST['sex']== 'M') {echo 'checked'; } ?> id="sexMale" value="M">
 						<label for="sexMale">		    
 							Je suis un homme
 						</label>

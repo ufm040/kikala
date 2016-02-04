@@ -72,7 +72,7 @@ label {
 		}*/
 
 #registerform .radio-inline input, #loginform .checkbox-inline input, #profileform .radio-inline input {
-	width: 0%;
+	width: 10%;
 }
 
 #registerform .radio-inline label, #loginform .checkbox-inline label, #profileform .radio-inline label {

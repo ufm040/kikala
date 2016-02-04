@@ -44,7 +44,7 @@
 
 				<div class="col-sm-12 col-xs-12">		
 					<label for="birthyear">Année de naissance</label>
-					<input type="date" placeholder="Année de naissance" name="birthyear" value="<?= (!empty($_POST['birthyear'])) ? $_POST['birthyear'] : '' ;?>"/>
+					<input type="text" placeholder="Année de naissance" name="birthyear" value="<?= (!empty($_POST['birthyear'])) ? $_POST['birthyear'] : '' ;?>"/>
 					<p class="error"><?= (!empty($error['birthyear'])) ? $error['birthyear'] : '' ;?></p>
 				</div>
 
